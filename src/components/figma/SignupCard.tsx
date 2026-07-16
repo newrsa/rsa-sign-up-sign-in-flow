@@ -96,19 +96,31 @@ export function FormInput({
   placeholder,
   value,
   filled = false,
+  type = "text",
+  inputMode,
+  maxLength,
 }: {
   placeholder: string;
   value?: string;
   filled?: boolean;
+  type?: string;
+  inputMode?: "text" | "tel" | "email" | "numeric" | "search" | "url" | "none";
+  maxLength?: number;
 }) {
   return (
     <div
-      className="flex items-center rounded border pl-3 pr-2 py-3"
+      className="flex items-center rounded border pl-3 pr-2"
       style={{ background: "#08081a", borderColor: filled ? "#9c9ca3" : "#393948" }}
     >
-      <span style={{ fontSize: 14, lineHeight: "18px", color: value ? "#e8e8f2" : "#6b6b76", fontFamily: "DM Sans, sans-serif" }}>
-        {value ?? placeholder}
-      </span>
+      <input
+        type={type}
+        inputMode={inputMode}
+        maxLength={maxLength}
+        defaultValue={value}
+        placeholder={placeholder}
+        className="w-full bg-transparent outline-none py-3"
+        style={{ fontSize: 14, lineHeight: "18px", color: "#e8e8f2", fontFamily: "DM Sans, sans-serif" }}
+      />
     </div>
   );
 }
