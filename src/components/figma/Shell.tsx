@@ -21,17 +21,10 @@ export function FigmaShell({
   rightContent?: ReactNode;
 }) {
   return (
-    <div className="h-screen w-screen overflow-hidden flex items-center justify-center" style={{ background: "#0e0f13" }}>
-      <div
-        className="relative bg-black origin-center flex-shrink-0"
-        style={{
-          width: 1440,
-          height: 900,
-          transform: "scale(min(calc(100vw / 1440px), calc(100vh / 900px)))",
-        }}
-      >
+    <div className="h-screen w-screen overflow-hidden" style={{ background: "#0e0f13" }}>
+      <div className="relative bg-black w-full h-full">
         {/* Primary navigation (left, full height) */}
-        <div className="absolute top-0 left-0 z-20" style={{ width: 115, height: 900 }}>
+        <div className="absolute top-0 left-0 z-20" style={{ width: 115, height: "100%" }}>
           <img src={primaryNavAsset.url} alt="" className="block w-full h-full" />
         </div>
 
@@ -42,21 +35,21 @@ export function FigmaShell({
             left: 115,
             top: 67,
             width: 600,
-            height: 833,
+            bottom: 0,
             background: "#0e0f13",
             borderLeft: "1px solid #272735",
           }}
         />
 
 
-        {/* Right section with hero image + text above */}
+        {/* Right section with hero image + text above — fills remaining width */}
         <div
           className="absolute overflow-hidden"
           style={{
             left: 715,
             top: 67,
-            width: 725,
-            height: 833,
+            right: 0,
+            bottom: 0,
             background: "#0e0f13",
             borderLeft: "1px solid #272735",
           }}
@@ -79,7 +72,7 @@ export function FigmaShell({
           {rightContent}
         </div>
 
-        {/* Title bar (full width) */}
+        {/* Title bar (starts after nav, extends to right edge) */}
         <TitleBar showBell={showAfterLoginBell} />
 
         {showCollapseChevron && (
@@ -97,6 +90,7 @@ export function FigmaShell({
     </div>
   );
 }
+
 
 
 function TitleBar({ showBell }: { showBell: boolean }) {
