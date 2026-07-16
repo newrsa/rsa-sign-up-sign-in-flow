@@ -30,31 +30,24 @@ export function FigmaShell({
           transform: "scale(min(calc(100vw / 1440px), calc(100vh / 900px)))",
         }}
       >
-        {/* Left signup section background (full-left, below 67px title bar) */}
+        {/* Primary navigation (left, full height) */}
+        <div className="absolute top-0 left-0 z-20" style={{ width: 115, height: 900 }}>
+          <img src={primaryNavAsset.url} alt="" className="block w-full h-full" />
+        </div>
+
+        {/* Left signup section background (after 115px nav, below 67px title bar) */}
         <div
           className="absolute overflow-hidden"
           style={{
-            left: 0,
+            left: 115,
             top: 67,
-            width: 715,
+            width: 600,
             height: 833,
             background: "#0e0f13",
+            borderLeft: "1px solid #272735",
           }}
-        >
-          {/* Decorative blob bottom-left */}
-          <div
-            className="absolute pointer-events-none"
-            style={{ left: -376, top: 600, width: 500, height: 504, display: "flex", alignItems: "center", justifyContent: "center" }}
-          >
-            <div style={{ transform: "rotate(44.61deg)", width: 146, height: 564, borderRadius: 84, background: "rgba(144,144,176,0.11)" }} />
-          </div>
-          <div
-            className="absolute pointer-events-none"
-            style={{ left: -372, top: 648, width: 500, height: 504, display: "flex", alignItems: "center", justifyContent: "center" }}
-          >
-            <div style={{ transform: "rotate(44.61deg)", width: 146, height: 564, borderRadius: 84, background: "rgba(144,144,176,0.12)" }} />
-          </div>
-        </div>
+        />
+
 
         {/* Right section with hero image + text above */}
         <div
