@@ -20,14 +20,14 @@ function VerifyOtp() {
         subtitle="Because every expert was once a beginner."
       />
       <SignupCard
-        fieldSlot={<FormInput placeholder="Enter OTP" />}
+        fieldSlot={<FormInput placeholder="Enter OTP" inputMode="numeric" maxLength={6} />}
         extraBelowInput={
           <>
             <p
               className="absolute"
               style={{
                 left: 36 + 288,
-                top: 169 + 502,
+                top: 433,
                 fontSize: 12,
                 color: "#6177ff",
                 fontFamily: "Outfit, sans-serif",
@@ -39,15 +39,8 @@ function VerifyOtp() {
             <p
               className="absolute"
               style={{
-                left: 36 + 288,
-                top: 169 + 502,
-              }}
-            />
-            <p
-              className="absolute"
-              style={{
                 left: 36,
-                top: 169 + 502,
+                top: 433,
                 fontSize: 12,
                 color: "#6b6b76",
                 fontFamily: "DM Sans, sans-serif",
@@ -60,7 +53,7 @@ function VerifyOtp() {
               className="absolute font-semibold"
               style={{
                 left: 36 + 92,
-                top: 169 + 502,
+                top: 433,
                 fontSize: 12,
                 color: "#6177ff",
                 fontFamily: "Outfit, sans-serif",
@@ -70,7 +63,7 @@ function VerifyOtp() {
             </a>
           </>
         }
-        actionButton={<PrimaryButton label="Send OTP" top={538} />}
+        actionButton={<PrimaryButton label="Send OTP" top={468} />}
       />
     </FigmaShell>
   );
