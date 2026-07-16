@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Bell, ChevronLeft } from "lucide-react";
 import heroImage from "@/assets/signup-hero.png.asset.json";
 import titleBarAsset from "@/assets/title-bar.svg.asset.json";
+import primaryNavAsset from "@/assets/primary-nav.svg.asset.json";
 
 /**
  * Shared shell used by all Figma screens.
