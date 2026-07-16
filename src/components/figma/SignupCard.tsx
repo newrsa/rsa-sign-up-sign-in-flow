@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Apple } from "lucide-react";
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
 
@@ -154,12 +154,33 @@ export function PrimaryButton({ label, top }: { label: string; top: number }) {
 export function AspirationalCopy({
   title,
   subtitle,
+  messages,
 }: {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
+  messages?: { title: string; subtitle: string }[];
 }) {
+  const allMessages = messages?.length
+    ? messages
+    : title && subtitle
+      ? [{ title, subtitle }]
+      : [];
+
+  const hasCarousel = allMessages.length > 1;
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (!hasCarousel) return;
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % allMessages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [hasCarousel, allMessages.length]);
+
+  const active = allMessages[index] ?? allMessages[0];
+
   return (
-    <div className="absolute z-10" style={{ left: 715 + 44, bottom: 200, width: 725 - 44 - 44 }}>
+    <div className="absolute z-10" style={{ left: 715 + 44, bottom: 260, width: 725 - 44 - 44 }}>
       <p
         className="text-white"
         style={{
@@ -170,7 +191,7 @@ export function AspirationalCopy({
           letterSpacing: "-0.5px",
         }}
       >
-        {title}
+        {active?.title}
       </p>
       <p
         className="text-white mt-3"
@@ -181,11 +202,30 @@ export function AspirationalCopy({
           fontWeight: 500,
         }}
       >
-        {subtitle}
+        {active?.subtitle}
       </p>
       <div className="flex gap-1 mt-6">
-        <span className="block h-[3px] w-3 rounded bg-[#3355f6]" />
-        <span className="block h-[3px] w-2 rounded bg-white/40" />
+        {hasCarousel ? (
+          allMessages.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setIndex(i)}
+              className="block h-[3px] rounded border-0 p-0"
+              style={{
+                width: i === index ? 12 : 8,
+                background: i === index ? "#3355f6" : "rgba(255,255,255,0.4)",
+                cursor: "pointer",
+              }}
+              aria-label={`Show message ${i + 1}`}
+            />
+          ))
+        ) : (
+          <>
+            <span className="block h-[3px] w-3 rounded bg-[#3355f6]" />
+            <span className="block h-[3px] w-2 rounded bg-white/40" />
+          </>
+        )}
       </div>
     </div>
   );
