@@ -16,7 +16,7 @@ export function GoogleIcon({ className = "h-6 w-6" }: { className?: string }) {
 // Card sits within the 715px-wide signup section (left edge = 0, width = 715).
 // Card is 434 wide, centered → left = (715-434)/2 ≈ 140.
 const CARD_LEFT = 140;
-const CARD_TOP = 200;
+const CARD_TOP = 130;
 
 export function SignupCard({
   fieldSlot,
