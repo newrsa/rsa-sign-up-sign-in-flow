@@ -22,7 +22,7 @@ export function FigmaShell({
   return (
     <div className="h-screen w-screen bg-black overflow-hidden flex items-center justify-center">
       <div
-        className="relative bg-black origin-center"
+        className="relative bg-black origin-center flex-shrink-0"
         style={{
           width: 1440,
           height: 900,
