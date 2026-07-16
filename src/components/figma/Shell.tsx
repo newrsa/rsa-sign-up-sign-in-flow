@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Bell, BookOpen, Calendar, ChevronLeft, Moon, Sun, User, Users } from "lucide-react";
+import { Bell, ChevronLeft, Moon, Sun } from "lucide-react";
 import heroImage from "@/assets/signup-hero.png.asset.json";
 
 /**
@@ -107,13 +107,6 @@ function Sidebar() {
   );
 }
 
-function NavIcon({ icon }: { icon: ReactNode }) {
-  return (
-    <div className="flex items-center justify-center rounded px-6 py-4 text-white/85 hover:text-white">
-      {icon}
-    </div>
-  );
-}
 
 function TitleBar({ showBell }: { showBell: boolean }) {
   return (
@@ -125,8 +118,8 @@ function TitleBar({ showBell }: { showBell: boolean }) {
         width: 1324,
         height: 67,
         background: "transparent",
-        borderColor: "#404249",
-        paddingRight: 34,
+        background: "transparent",
+
       }}
     >
       <ThemeSwitcher />
