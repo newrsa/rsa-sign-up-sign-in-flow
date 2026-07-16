@@ -119,44 +119,28 @@ function Sidebar() {
 function TitleBar({ showBell }: { showBell: boolean }) {
   return (
     <div
-      className="absolute flex items-center justify-end gap-4 z-10"
+      className="absolute flex items-center justify-end z-10"
       style={{
         top: 0,
         left: 116,
         width: 1324,
-        height: 67,
-        background: "transparent",
-        paddingRight: 34,
+        height: 66,
       }}
     >
-      <ThemeSwitcher />
+      <img
+        src={titleBarAsset.url}
+        alt=""
+        className="absolute inset-0 h-full w-full"
+        style={{ objectFit: "fill" }}
+      />
       {showBell && (
-        <button className="flex items-center justify-center rounded-lg p-[10px]" style={{ background: "#2c2e35" }}>
+        <button
+          className="relative z-10 flex items-center justify-center rounded-lg p-[10px] mr-[34px]"
+          style={{ background: "#2c2e35" }}
+        >
           <Bell className="h-4 w-4 text-white" />
         </button>
       )}
-    </div>
-  );
-}
-
-function ThemeSwitcher() {
-  return (
-    <div
-      className="relative flex items-center rounded-full border"
-      style={{ width: 68, height: 29, background: "#1a1b20", borderColor: "#404249" }}
-    >
-      <div
-        className="absolute rounded-full flex items-center justify-center"
-        style={{ left: 3, top: 2, width: 25, height: 25, background: "#fff" }}
-      >
-        <Sun className="h-[15px] w-[15px] text-[#1a1b20]" />
-      </div>
-      <div
-        className="absolute rounded-full flex items-center justify-center"
-        style={{ left: 39, top: 2, width: 25, height: 25 }}
-      >
-        <Moon className="h-[15px] w-[15px] text-white/60" />
-      </div>
     </div>
   );
 }
