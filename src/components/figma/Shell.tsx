@@ -29,6 +29,12 @@ export function FigmaShell({
           <img src={primaryNavAsset.url} alt="" className="block w-full h-full" />
         </div>
 
+        {/* Vertical separator between primary nav and the rest of the page (full height) */}
+        <div
+          className="absolute z-30"
+          style={{ left: 115, top: 0, width: 1, height: "100%", background: "#272735" }}
+        />
+
         {/* Left signup section background (after 115px nav, below 67px title bar) */}
         <div
           className="absolute overflow-hidden"
