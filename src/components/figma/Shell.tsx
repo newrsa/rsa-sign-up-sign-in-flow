@@ -97,7 +97,7 @@ export function FigmaShell({
 function Sidebar() {
   return (
     <aside
-      className="absolute top-0 left-0 overflow-hidden bg-black"
+      className="absolute top-0 left-0 overflow-hidden bg-black z-20"
       style={{ width: 115, height: 900 }}
     >
       <div
