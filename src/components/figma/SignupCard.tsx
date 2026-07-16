@@ -145,7 +145,7 @@ export function AspirationalCopy({
   subtitle: string;
 }) {
   return (
-    <div className="absolute z-10" style={{ left: 715 + 56, top: 110, width: 613 }}>
+    <div className="absolute z-10" style={{ left: 715 + 44, bottom: 228, width: 725 - 44 - 44 }}>
       <p
         className="text-white"
         style={{
