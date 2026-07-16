@@ -20,13 +20,13 @@ export function FigmaShell({
   rightContent?: ReactNode;
 }) {
   return (
-    <div className="h-screen w-screen bg-black overflow-hidden flex items-center justify-center">
+    <div className="h-screen w-screen overflow-hidden flex items-center justify-center" style={{ background: "#0e0f13" }}>
       <div
         className="relative bg-black origin-center flex-shrink-0"
         style={{
           width: 1440,
           height: 900,
-          transform: "scale(calc(100vw / 1440px), calc(100vh / 900px))",
+          transform: "scale(min(calc(100vw / 1440px), calc(100vh / 900px)))",
         }}
       >
         {/* Left signup section background (full-left, below 67px title bar) */}
