@@ -21,8 +21,9 @@ export function FigmaShell({
   rightContent?: ReactNode;
 }) {
   return (
-    <div className="h-screen w-screen overflow-hidden" style={{ background: "#0e0f13" }}>
-      <div className="relative bg-black w-full h-full">
+    <div className="w-screen overflow-x-hidden overflow-y-auto" style={{ background: "#0e0f13", minHeight: "100vh" }}>
+      <div className="relative bg-black w-full" style={{ minHeight: "calc(100vh + 40px)" }}>
+
         {/* Primary navigation (left, full height) */}
         <div className="absolute top-0 left-0 z-20" style={{ width: 115, height: "100%" }}>
           <img src={primaryNavAsset.url} alt="" className="block w-full h-full" />
