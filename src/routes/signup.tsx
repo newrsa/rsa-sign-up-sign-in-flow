@@ -110,12 +110,16 @@ function SignupScreen() {
         fieldSlot={
           otpSent ? (
             <FormInput
+              key="otp-input"
               placeholder="Enter OTP"
               inputMode="numeric"
               maxLength={6}
+              value=""
+              onChange={() => {}}
             />
           ) : (
             <FormInput
+              key="mobile-input"
               placeholder="Enter your registered mobile number"
               type="tel"
               inputMode="tel"
