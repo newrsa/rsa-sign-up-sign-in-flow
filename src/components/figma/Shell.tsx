@@ -19,8 +19,15 @@ export function FigmaShell({
   rightContent?: ReactNode;
 }) {
   return (
-    <div className="min-h-screen w-full bg-black flex items-start justify-center overflow-x-auto">
-      <div className="relative bg-black" style={{ width: 1440, height: 900 }}>
+    <div className="h-screen w-screen bg-black overflow-hidden flex items-center justify-center">
+      <div
+        className="relative bg-black origin-center"
+        style={{
+          width: 1440,
+          height: 900,
+          transform: "scale(min(100vw / 1440, 100vh / 900))",
+        }}
+      >
         {/* Left signup section background (starts after 115px nav, 600px wide) */}
         <div
           className="absolute top-0 overflow-hidden"
