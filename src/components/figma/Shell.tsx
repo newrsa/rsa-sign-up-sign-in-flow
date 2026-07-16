@@ -29,13 +29,14 @@ export function FigmaShell({
           transform: "scale(min(100vw / 1440, 100vh / 900))",
         }}
       >
-        {/* Left signup section background (starts after 115px nav, 600px wide) */}
+        {/* Left signup section background (starts after 115px nav, 600px wide, below 67px title bar) */}
         <div
-          className="absolute top-0 overflow-hidden"
+          className="absolute overflow-hidden"
           style={{
             left: 115,
+            top: 67,
             width: 600,
-            height: 900,
+            height: 833,
             background: "#0e0f13",
             borderLeft: "1px solid #404249",
           }}
@@ -43,11 +44,12 @@ export function FigmaShell({
 
         {/* Right section with hero image + text above */}
         <div
-          className="absolute top-0 overflow-hidden"
+          className="absolute overflow-hidden"
           style={{
             left: 715,
+            top: 67,
             width: 725,
-            height: 900,
+            height: 833,
             background: "#0e0f13",
             borderLeft: "1px solid #272735",
           }}
