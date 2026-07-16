@@ -54,7 +54,7 @@ export function SignupCard({
       <div className="absolute flex flex-col gap-3" style={{ left: 36, top: 205, width: 360 }}>
         <button className="flex items-center justify-center gap-3 rounded px-4 py-[10px]" style={{ background: "#fdfdfd" }}>
           <GoogleIcon />
-          <span className="font-medium" style={{ color: "#515151", fontSize: 18, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.144px" }}>
+          <span className="font-medium" style={{ color: "#515151", fontSize: 16, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.144px" }}>
             Sign up with Google
           </span>
         </button>
