@@ -118,8 +118,7 @@ function TitleBar({ showBell }: { showBell: boolean }) {
         width: 1324,
         height: 67,
         background: "transparent",
-        background: "transparent",
-
+        paddingRight: 34,
       }}
     >
       <ThemeSwitcher />
