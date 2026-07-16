@@ -105,39 +105,15 @@ export function FigmaShell({
 }
 
 
-function Sidebar() {
-  return (
-    <aside
-      className="absolute top-0 left-0 overflow-hidden bg-black z-20"
-      style={{ width: 115, height: 900 }}
-    >
-      <div
-        className="absolute"
-        style={{ left: -376, top: 600, width: 500, height: 504, display: "flex", alignItems: "center", justifyContent: "center" }}
-      >
-        <div style={{ transform: "rotate(44.61deg)", width: 146, height: 564, borderRadius: 84, background: "rgba(144,144,176,0.11)" }} />
-      </div>
-      <div
-        className="absolute"
-        style={{ left: -372, top: 648, width: 500, height: 504, display: "flex", alignItems: "center", justifyContent: "center" }}
-      >
-        <div style={{ transform: "rotate(44.61deg)", width: 146, height: 564, borderRadius: 84, background: "rgba(144,144,176,0.12)" }} />
-      </div>
-
-    </aside>
-  );
-}
-
-
 function TitleBar({ showBell }: { showBell: boolean }) {
   return (
     <div
       className="absolute flex items-center justify-end z-10"
       style={{
         top: 0,
-        left: 116,
-        width: 1324,
-        height: 66,
+        left: 0,
+        width: 1440,
+        height: 67,
       }}
     >
       <img
@@ -157,3 +133,4 @@ function TitleBar({ showBell }: { showBell: boolean }) {
     </div>
   );
 }
+
