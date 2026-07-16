@@ -105,8 +105,8 @@ function TitleBar({ showBell }: { showBell: boolean }) {
       className="absolute flex items-center justify-end z-10"
       style={{
         top: 0,
-        left: 0,
-        width: 1440,
+        left: 115,
+        width: 1325,
         height: 67,
       }}
     >
