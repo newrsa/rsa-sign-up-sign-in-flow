@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerifyOtpEnteredRouteImport } from './routes/verify-otp-entered'
+import { Route as VerifyOtpRouteImport } from './routes/verify-otp'
+import { Route as SignupMobileRouteImport } from './routes/signup-mobile'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VerifyOtpEnteredRoute = VerifyOtpEnteredRouteImport.update({
+  id: '/verify-otp-entered',
+  path: '/verify-otp-entered',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyOtpRoute = VerifyOtpRouteImport.update({
+  id: '/verify-otp',
+  path: '/verify-otp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupMobileRoute = SignupMobileRouteImport.update({
+  id: '/signup-mobile',
+  path: '/signup-mobile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,102 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/home': typeof HomeRoute
+  '/signup': typeof SignupRoute
+  '/signup-mobile': typeof SignupMobileRoute
+  '/verify-otp': typeof VerifyOtpRoute
+  '/verify-otp-entered': typeof VerifyOtpEnteredRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/home': typeof HomeRoute
+  '/signup': typeof SignupRoute
+  '/signup-mobile': typeof SignupMobileRoute
+  '/verify-otp': typeof VerifyOtpRoute
+  '/verify-otp-entered': typeof VerifyOtpEnteredRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/home': typeof HomeRoute
+  '/signup': typeof SignupRoute
+  '/signup-mobile': typeof SignupMobileRoute
+  '/verify-otp': typeof VerifyOtpRoute
+  '/verify-otp-entered': typeof VerifyOtpEnteredRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/home'
+    | '/signup'
+    | '/signup-mobile'
+    | '/verify-otp'
+    | '/verify-otp-entered'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/home'
+    | '/signup'
+    | '/signup-mobile'
+    | '/verify-otp'
+    | '/verify-otp-entered'
+  id:
+    | '__root__'
+    | '/'
+    | '/home'
+    | '/signup'
+    | '/signup-mobile'
+    | '/verify-otp'
+    | '/verify-otp-entered'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HomeRoute: typeof HomeRoute
+  SignupRoute: typeof SignupRoute
+  SignupMobileRoute: typeof SignupMobileRoute
+  VerifyOtpRoute: typeof VerifyOtpRoute
+  VerifyOtpEnteredRoute: typeof VerifyOtpEnteredRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verify-otp-entered': {
+      id: '/verify-otp-entered'
+      path: '/verify-otp-entered'
+      fullPath: '/verify-otp-entered'
+      preLoaderRoute: typeof VerifyOtpEnteredRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify-otp': {
+      id: '/verify-otp'
+      path: '/verify-otp'
+      fullPath: '/verify-otp'
+      preLoaderRoute: typeof VerifyOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup-mobile': {
+      id: '/signup-mobile'
+      path: '/signup-mobile'
+      fullPath: '/signup-mobile'
+      preLoaderRoute: typeof SignupMobileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +157,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HomeRoute: HomeRoute,
+  SignupRoute: SignupRoute,
+  SignupMobileRoute: SignupMobileRoute,
+  VerifyOtpRoute: VerifyOtpRoute,
+  VerifyOtpEnteredRoute: VerifyOtpEnteredRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

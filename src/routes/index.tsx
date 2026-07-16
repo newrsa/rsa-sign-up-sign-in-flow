@@ -1,24 +1,42 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "RightStepAhead — Screens Index" },
+      { name: "description", content: "Preview index for the RSA Figma screens." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const screens = [
+  { to: "/signup", label: "1.1 · Signup (empty)" },
+  { to: "/signup-mobile", label: "1.2 · Signup (mobile entered)" },
+  { to: "/verify-otp", label: "1.3 · Verify OTP (empty)" },
+  { to: "/verify-otp-entered", label: "1.4 · Verify OTP (entered)" },
+  { to: "/home", label: "1.5 · Homepage (empty)" },
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-[#0e0f13] text-white flex items-center justify-center px-6">
+      <div className="w-full max-w-xl">
+        <h1 className="text-3xl font-semibold mb-2">RightStepAhead</h1>
+        <p className="text-white/60 mb-8">Figma screen previews.</p>
+        <ul className="space-y-3">
+          {screens.map((s) => (
+            <li key={s.to}>
+              <Link
+                to={s.to}
+                className="block rounded-md border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 transition"
+              >
+                {s.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

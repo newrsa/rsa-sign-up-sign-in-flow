@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 60" fill="none">
+  <g>
+    <rect x="6" y="4" width="46" height="12" rx="6" fill="#3BB54A"/>
+    <rect x="6" y="22" width="40" height="12" rx="6" fill="#22C4C4"/>
+    <rect x="6" y="40" width="36" height="12" rx="6" fill="#0433FF"/>
+    <path d="M6 4 L6 52" stroke="#3BB54A" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <text x="70" y="42" font-family="Outfit, Inter, sans-serif" font-weight="800" font-size="34" fill="#FFFFFF">RightStep</text>
+  <text x="268" y="42" font-family="Outfit, Inter, sans-serif" font-weight="800" font-size="34" fill="#3BB54A">Ahead</text>
+</svg>
