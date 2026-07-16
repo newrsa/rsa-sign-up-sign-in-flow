@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Bell, BookOpen, Calendar, ChevronLeft, Moon, Sun, User, Users } from "lucide-react";
+import { Bell, ChevronLeft, Moon, Sun } from "lucide-react";
 import heroImage from "@/assets/signup-hero.png.asset.json";
 
 /**
@@ -77,12 +77,6 @@ export function FigmaShell({
           </div>
         )}
 
-        <div
-          className="absolute font-bold text-[18px] z-10"
-          style={{ color: "#e9c86e", top: 40, left: 140, fontFamily: "Montserrat, sans-serif" }}
-        >
-          Canvas
-        </div>
 
         {children}
       </div>
@@ -109,36 +103,21 @@ function Sidebar() {
         <div style={{ transform: "rotate(44.61deg)", width: 146, height: 564, borderRadius: 84, background: "rgba(144,144,176,0.12)" }} />
       </div>
 
-      <nav className="absolute flex flex-col gap-3 items-center" style={{ left: 24, top: 280, width: 65 }}>
-        <NavIcon icon={<ChevronLeft className="h-5 w-5 rotate-180" />} />
-        <NavIcon icon={<BookOpen className="h-5 w-5" />} />
-        <NavIcon icon={<Users className="h-5 w-5" />} />
-        <NavIcon icon={<User className="h-5 w-5" />} />
-        <NavIcon icon={<Calendar className="h-5 w-5" />} />
-      </nav>
     </aside>
   );
 }
 
-function NavIcon({ icon }: { icon: ReactNode }) {
-  return (
-    <div className="flex items-center justify-center rounded px-6 py-4 text-white/85 hover:text-white">
-      {icon}
-    </div>
-  );
-}
 
 function TitleBar({ showBell }: { showBell: boolean }) {
   return (
     <div
-      className="absolute flex items-center justify-end gap-4 border-b z-10"
+      className="absolute flex items-center justify-end gap-4 z-10"
       style={{
         top: 0,
         left: 116,
         width: 1324,
         height: 67,
         background: "transparent",
-        borderColor: "#404249",
         paddingRight: 34,
       }}
     >
