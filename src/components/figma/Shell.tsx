@@ -100,10 +100,11 @@ function TitleBar({ showBell }: { showBell: boolean }) {
       style={{
         top: 0,
         left: 115,
-        width: 1325,
+        right: 0,
         height: 67,
       }}
     >
+
       <img
         src={titleBarAsset.url}
         alt=""
