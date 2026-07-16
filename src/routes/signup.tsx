@@ -20,8 +20,8 @@ function SignupScreen() {
         subtitle="It's shaped by what you choose to learn and do every day."
       />
       <SignupCard
-        fieldSlot={<FormInput placeholder="Enter your registered contact number" />}
-        actionButton={<PrimaryButton label="Send OTP" top={498} />}
+        fieldSlot={<FormInput placeholder="Enter your registered mobile number" type="tel" inputMode="tel" maxLength={15} />}
+        actionButton={<PrimaryButton label="Send OTP" top={440} />}
       />
     </FigmaShell>
   );
