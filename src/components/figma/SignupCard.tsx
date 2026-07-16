@@ -79,12 +79,14 @@ export function SignupCard({
       {extraBelowInput}
       {actionButton}
 
-      <p className="absolute" style={{ left: 36, top: 540, fontSize: 12, color: "#6b6b76", fontFamily: "DM Sans, sans-serif" }}>
-        Already have an account?
-      </p>
-      <a href="#" className="absolute font-semibold" style={{ left: 165, top: 540, fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
-        Sign In
-      </a>
+      <div className="absolute flex items-center" style={{ left: 36, top: 540, gap: 6 }}>
+        <p style={{ fontSize: 12, color: "#6b6b76", fontFamily: "DM Sans, sans-serif" }}>
+          Already have an account?
+        </p>
+        <a href="#" className="font-semibold" style={{ fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
+          Sign In
+        </a>
+      </div>
       <a href="#" className="absolute font-semibold text-right" style={{ right: 38, top: 540, fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
         Forgot Password?
       </a>
