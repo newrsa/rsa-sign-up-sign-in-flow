@@ -29,18 +29,31 @@ export function FigmaShell({
           transform: "scale(min(calc(100vw / 1440px), calc(100vh / 900px)))",
         }}
       >
-        {/* Left signup section background (starts after 115px nav, 600px wide, below 67px title bar) */}
+        {/* Left signup section background (full-left, below 67px title bar) */}
         <div
           className="absolute overflow-hidden"
           style={{
-            left: 115,
+            left: 0,
             top: 67,
-            width: 600,
+            width: 715,
             height: 833,
             background: "#0e0f13",
-            borderLeft: "1px solid #404249",
           }}
-        />
+        >
+          {/* Decorative blob bottom-left */}
+          <div
+            className="absolute pointer-events-none"
+            style={{ left: -376, top: 600, width: 500, height: 504, display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <div style={{ transform: "rotate(44.61deg)", width: 146, height: 564, borderRadius: 84, background: "rgba(144,144,176,0.11)" }} />
+          </div>
+          <div
+            className="absolute pointer-events-none"
+            style={{ left: -372, top: 648, width: 500, height: 504, display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <div style={{ transform: "rotate(44.61deg)", width: 146, height: 564, borderRadius: 84, background: "rgba(144,144,176,0.12)" }} />
+          </div>
+        </div>
 
         {/* Right section with hero image + text above */}
         <div
@@ -72,16 +85,13 @@ export function FigmaShell({
           {rightContent}
         </div>
 
-        {/* Sidebar */}
-        <Sidebar />
-
-        {/* Title bar (spans right of nav) */}
+        {/* Title bar (full width) */}
         <TitleBar showBell={showAfterLoginBell} />
 
         {showCollapseChevron && (
           <div
             className="absolute z-20 flex items-center justify-center rounded-sm border border-white bg-black"
-            style={{ left: 107, top: 80, width: 16, height: 10 }}
+            style={{ left: 8, top: 80, width: 16, height: 10 }}
           >
             <ChevronLeft className="h-2.5 w-2.5 text-white" strokeWidth={2.5} />
           </div>
@@ -93,6 +103,7 @@ export function FigmaShell({
     </div>
   );
 }
+
 
 function Sidebar() {
   return (
