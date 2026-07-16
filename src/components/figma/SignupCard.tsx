@@ -39,53 +39,53 @@ export function SignupCard({
 
       <h1
         className="absolute font-semibold tracking-[-0.192px]"
-        style={{ left: 36, top: 154, fontSize: 24, color: "#f8f8fc", fontFamily: "Outfit, sans-serif" }}
+        style={{ left: 36, top: 89, fontSize: 24, color: "#f8f8fc", fontFamily: "Outfit, sans-serif" }}
       >
         Decoding Aspirations
       </h1>
 
       <p
         className="absolute"
-        style={{ left: 36, top: 208, width: 277, fontSize: 18, color: "#f8f8fc", letterSpacing: "-0.144px", fontFamily: "Outfit, sans-serif" }}
+        style={{ left: 36, top: 137, width: 277, fontSize: 18, color: "#f8f8fc", letterSpacing: "-0.144px", fontFamily: "Outfit, sans-serif" }}
       >
         Sign up using your email address or mobile number.
       </p>
 
-      <div className="absolute flex flex-col gap-3" style={{ left: 36, top: 262, width: 360 }}>
+      <div className="absolute flex flex-col gap-3" style={{ left: 36, top: 205, width: 360 }}>
         <button className="flex items-center justify-center gap-3 rounded px-4 py-[10px]" style={{ background: "#fdfdfd" }}>
           <GoogleIcon />
-          <span className="font-medium" style={{ color: "#515151", fontSize: 20, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.16px" }}>
+          <span className="font-medium" style={{ color: "#515151", fontSize: 18, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.144px" }}>
             Sign up with Google
           </span>
         </button>
         <button className="flex items-center justify-center gap-3 rounded px-4 py-[10px]" style={{ background: "#272727" }}>
           <Apple className="h-6 w-6 text-white" fill="white" />
-          <span className="font-medium" style={{ color: "#fdfdfd", fontSize: 16, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.128px" }}>
+          <span className="font-medium" style={{ color: "#fdfdfd", fontSize: 18, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.144px" }}>
             Sign in with Apple
           </span>
         </button>
       </div>
 
-      <div className="absolute" style={{ left: 36, top: 408, width: 158, height: 1, background: "#404249" }} />
-      <div className="absolute" style={{ left: 238, top: 408, width: 158, height: 1, background: "#404249" }} />
-      <p className="absolute italic font-medium" style={{ left: 205, top: 399, color: "#b3b3b3", fontSize: 16, fontFamily: "DM Sans, sans-serif" }}>
+      <div className="absolute" style={{ left: 36, top: 345, width: 158, height: 1, background: "#404249" }} />
+      <div className="absolute" style={{ left: 238, top: 345, width: 158, height: 1, background: "#404249" }} />
+      <p className="absolute italic font-medium" style={{ left: 205, top: 336, color: "#b3b3b3", fontSize: 16, fontFamily: "DM Sans, sans-serif" }}>
         Or
       </p>
 
-      <div className="absolute" style={{ left: 36, top: 444, width: 360 }}>
+      <div className="absolute" style={{ left: 36, top: 381, width: 360 }}>
         {fieldSlot}
       </div>
 
       {extraBelowInput}
       {actionButton}
 
-      <p className="absolute" style={{ left: 36, top: 598, fontSize: 12, color: "#6b6b76", fontFamily: "DM Sans, sans-serif" }}>
+      <p className="absolute" style={{ left: 36, top: 540, fontSize: 12, color: "#6b6b76", fontFamily: "DM Sans, sans-serif" }}>
         Already have an account?
       </p>
-      <a href="#" className="absolute font-semibold" style={{ left: 165, top: 598, fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
+      <a href="#" className="absolute font-semibold" style={{ left: 165, top: 540, fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
         Sign In
       </a>
-      <a href="#" className="absolute font-semibold text-right" style={{ right: 38, top: 598, fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
+      <a href="#" className="absolute font-semibold text-right" style={{ right: 38, top: 540, fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
         Forgot Password?
       </a>
     </div>
@@ -96,19 +96,31 @@ export function FormInput({
   placeholder,
   value,
   filled = false,
+  type = "text",
+  inputMode,
+  maxLength,
 }: {
   placeholder: string;
   value?: string;
   filled?: boolean;
+  type?: string;
+  inputMode?: "text" | "tel" | "email" | "numeric" | "search" | "url" | "none";
+  maxLength?: number;
 }) {
   return (
     <div
-      className="flex items-center rounded border pl-3 pr-2 py-3"
+      className="flex items-center rounded border pl-3 pr-2"
       style={{ background: "#08081a", borderColor: filled ? "#9c9ca3" : "#393948" }}
     >
-      <span style={{ fontSize: 14, lineHeight: "18px", color: value ? "#e8e8f2" : "#6b6b76", fontFamily: "DM Sans, sans-serif" }}>
-        {value ?? placeholder}
-      </span>
+      <input
+        type={type}
+        inputMode={inputMode}
+        maxLength={maxLength}
+        defaultValue={value}
+        placeholder={placeholder}
+        className="w-full bg-transparent outline-none py-3"
+        style={{ fontSize: 14, lineHeight: "18px", color: "#e8e8f2", fontFamily: "DM Sans, sans-serif" }}
+      />
     </div>
   );
 }

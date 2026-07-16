@@ -20,8 +20,8 @@ function SignupMobile() {
         subtitle="Because every expert was once a beginner."
       />
       <SignupCard
-        fieldSlot={<FormInput placeholder="" value="91-9876543210" filled />}
-        actionButton={<PrimaryButton label="Send OTP" top={498} />}
+        fieldSlot={<FormInput placeholder="" value="91-9876543210" filled type="tel" inputMode="tel" />}
+        actionButton={<PrimaryButton label="Send OTP" top={440} />}
       />
     </FigmaShell>
   );
