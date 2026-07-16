@@ -101,6 +101,7 @@ export function FormInput({
   type = "text",
   inputMode,
   maxLength,
+  onChange,
 }: {
   placeholder: string;
   value?: string;
@@ -108,7 +109,9 @@ export function FormInput({
   type?: string;
   inputMode?: "text" | "tel" | "email" | "numeric" | "search" | "url" | "none";
   maxLength?: number;
+  onChange?: (value: string) => void;
 }) {
+  const controlled = onChange !== undefined;
   return (
     <div
       className="flex items-center rounded border pl-3 pr-2"
@@ -118,7 +121,8 @@ export function FormInput({
         type={type}
         inputMode={inputMode}
         maxLength={maxLength}
-        defaultValue={value}
+        {...(controlled ? { value: value ?? "" } : { defaultValue: value })}
+        onChange={(e) => onChange?.(e.target.value)}
         placeholder={placeholder}
         className="w-full bg-transparent outline-none py-3"
         style={{ fontSize: 14, lineHeight: "18px", color: "#e8e8f2", fontFamily: "DM Sans, sans-serif" }}
@@ -127,9 +131,22 @@ export function FormInput({
   );
 }
 
-export function PrimaryButton({ label, top }: { label: string; top: number }) {
+export function PrimaryButton({
+  label,
+  top,
+  onClick,
+  disabled = false,
+}: {
+  label: string;
+  top: number;
+  onClick?: () => void;
+  disabled?: boolean;
+}) {
   return (
     <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
       className="absolute flex items-center justify-center rounded px-4 py-[10px] font-bold text-white"
       style={{
         left: 36,
@@ -140,6 +157,8 @@ export function PrimaryButton({ label, top }: { label: string; top: number }) {
         lineHeight: "24px",
         fontFamily: "Outfit, sans-serif",
         boxShadow: "0px 1px 0.25px rgba(29,41,61,0.02)",
+        opacity: disabled ? 0.5 : 1,
+        cursor: disabled ? "not-allowed" : "pointer",
       }}
     >
       {label}
