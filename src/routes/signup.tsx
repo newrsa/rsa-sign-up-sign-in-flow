@@ -16,8 +16,16 @@ function SignupScreen() {
   return (
     <FigmaShell>
       <AspirationalCopy
-        title="Your future isn't decided today!"
-        subtitle="It's shaped by what you choose to learn and do every day."
+        messages={[
+          {
+            title: "Your future isn't decided today!",
+            subtitle: "It's shaped by what you choose to learn and do every day.",
+          },
+          {
+            title: "Big dreams begin with small actions.",
+            subtitle: "What you do today shapes who you'll become tomorrow.",
+          },
+        ]}
       />
       <SignupCard
         fieldSlot={<FormInput placeholder="Enter your registered mobile number" type="tel" inputMode="tel" maxLength={15} />}
