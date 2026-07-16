@@ -18,6 +18,7 @@ function SignupScreen() {
   const [mobile, setMobile] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [toastOpacity, setToastOpacity] = useState(1);
   const [seconds, setSeconds] = useState(60);
 
   const isValid = /^\d{10}$/.test(mobile);
@@ -31,8 +32,13 @@ function SignupScreen() {
 
   useEffect(() => {
     if (!showToast) return;
-    const t = setTimeout(() => setShowToast(false), 4000);
-    return () => clearTimeout(t);
+    setToastOpacity(1);
+    const fadeTimer = setTimeout(() => setToastOpacity(0), 15000);
+    const hideTimer = setTimeout(() => setShowToast(false), 15500);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
   }, [showToast]);
 
   const handleSend = () => {
