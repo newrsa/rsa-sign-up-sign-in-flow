@@ -60,7 +60,7 @@ export function SignupCard({
         </button>
         <button className="flex items-center justify-center gap-3 rounded px-4 py-[10px]" style={{ background: "#272727" }}>
           <Apple className="h-6 w-6 text-white" fill="white" />
-          <span className="font-medium" style={{ color: "#fdfdfd", fontSize: 18, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.144px" }}>
+          <span className="font-medium" style={{ color: "#fdfdfd", fontSize: 16, fontFamily: "Outfit, sans-serif", letterSpacing: "-0.144px" }}>
             Sign in with Apple
           </span>
         </button>
