@@ -10,7 +10,7 @@ export function FigmaShell({
   showAfterLoginBell = false,
   showCollapseChevron = false,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   showAfterLoginBell?: boolean;
   showCollapseChevron?: boolean;
 }) {
