@@ -39,14 +39,14 @@ export function SignupCard({
 
       <h1
         className="absolute font-semibold tracking-[-0.192px]"
-        style={{ left: 36, top: 89, fontSize: 24, color: "#f8f8fc", fontFamily: "Outfit, sans-serif" }}
+        style={{ left: 36, top: 89, fontSize: 22, color: "#f8f8fc", fontFamily: "Outfit, sans-serif" }}
       >
         Decoding Aspirations
       </h1>
 
       <p
         className="absolute"
-        style={{ left: 36, top: 137, width: 277, fontSize: 18, color: "#f8f8fc", letterSpacing: "-0.144px", fontFamily: "Outfit, sans-serif" }}
+        style={{ left: 36, top: 137, width: 277, fontSize: 16, color: "#f8f8fc", letterSpacing: "-0.144px", fontFamily: "Outfit, sans-serif" }}
       >
         Sign up using your email address or mobile number.
       </p>
