@@ -20,14 +20,14 @@ function VerifyOtpEntered() {
         subtitle="Because every expert was once a beginner."
       />
       <SignupCard
-        fieldSlot={<FormInput placeholder="" value="5 6 4 6 8 9" filled />}
+        fieldSlot={<FormInput placeholder="" value="5 6 4 6 8 9" filled inputMode="numeric" />}
         extraBelowInput={
           <>
             <p
               className="absolute"
               style={{
                 left: 36 + 288,
-                top: 169 + 502,
+                top: 433,
                 fontSize: 12,
                 color: "#6177ff",
                 fontFamily: "Outfit, sans-serif",
@@ -40,7 +40,7 @@ function VerifyOtpEntered() {
               className="absolute"
               style={{
                 left: 36,
-                top: 169 + 502,
+                top: 433,
                 fontSize: 12,
                 color: "#6b6b76",
                 fontFamily: "DM Sans, sans-serif",
@@ -53,7 +53,7 @@ function VerifyOtpEntered() {
               className="absolute font-semibold"
               style={{
                 left: 36 + 92,
-                top: 169 + 502,
+                top: 433,
                 fontSize: 12,
                 color: "#6177ff",
                 fontFamily: "Outfit, sans-serif",
@@ -63,7 +63,7 @@ function VerifyOtpEntered() {
             </a>
           </>
         }
-        actionButton={<PrimaryButton label="Verify Code" top={538} />}
+        actionButton={<PrimaryButton label="Verify Code" top={468} />}
       />
     </FigmaShell>
   );
