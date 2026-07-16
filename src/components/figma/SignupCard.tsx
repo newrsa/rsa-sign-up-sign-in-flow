@@ -168,11 +168,25 @@ export function AspirationalCopy({
 
   const hasCarousel = allMessages.length > 1;
   const [index, setIndex] = useState(0);
+  const [fading, setFading] = useState(false);
+
+  const goTo = (i: number) => {
+    if (i === index || fading || !hasCarousel) return;
+    setFading(true);
+    setTimeout(() => {
+      setIndex(i);
+      setFading(false);
+    }, 300);
+  };
 
   useEffect(() => {
     if (!hasCarousel) return;
     const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % allMessages.length);
+      setFading(true);
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % allMessages.length);
+        setFading(false);
+      }, 300);
     }, 5000);
     return () => clearInterval(timer);
   }, [hasCarousel, allMessages.length]);
@@ -180,38 +194,43 @@ export function AspirationalCopy({
   const active = allMessages[index] ?? allMessages[0];
 
   return (
-    <div className="absolute z-10" style={{ left: 715 + 44, bottom: 260, width: 725 - 44 - 44 }}>
-      <p
-        className="text-white"
-        style={{
-          fontSize: 40,
-          lineHeight: 1.2,
-          fontFamily: "Outfit, sans-serif",
-          fontWeight: 700,
-          letterSpacing: "-0.5px",
-        }}
+    <div className="absolute z-10" style={{ left: 715 + 44, bottom: 320, width: 725 - 44 - 44 }}>
+      <div
+        className="transition-opacity duration-300 ease-out"
+        style={{ opacity: fading ? 0 : 1 }}
       >
-        {active?.title}
-      </p>
-      <p
-        className="text-white mt-3"
-        style={{
-          fontSize: 24,
-          lineHeight: 1.35,
-          fontFamily: "Outfit, sans-serif",
-          fontWeight: 500,
-        }}
-      >
-        {active?.subtitle}
-      </p>
+        <p
+          className="text-white"
+          style={{
+            fontSize: 40,
+            lineHeight: 1.2,
+            fontFamily: "Outfit, sans-serif",
+            fontWeight: 700,
+            letterSpacing: "-0.5px",
+          }}
+        >
+          {active?.title}
+        </p>
+        <p
+          className="text-white mt-3"
+          style={{
+            fontSize: 24,
+            lineHeight: 1.35,
+            fontFamily: "Outfit, sans-serif",
+            fontWeight: 500,
+          }}
+        >
+          {active?.subtitle}
+        </p>
+      </div>
       <div className="flex gap-1 mt-6">
         {hasCarousel ? (
           allMessages.map((_, i) => (
             <button
               key={i}
               type="button"
-              onClick={() => setIndex(i)}
-              className="block h-[3px] rounded border-0 p-0"
+              onClick={() => goTo(i)}
+              className="block h-[3px] rounded border-0 p-0 transition-all duration-300"
               style={{
                 width: i === index ? 12 : 8,
                 background: i === index ? "#3355f6" : "rgba(255,255,255,0.4)",
