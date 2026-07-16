@@ -26,7 +26,7 @@ export function FigmaShell({
         style={{
           width: 1440,
           height: 900,
-          transform: "scale(min(100vw / 1440, 100vh / 900))",
+          transform: "scale(min(calc(100vw / 1440px), calc(100vh / 900px)))",
         }}
       >
         {/* Left signup section background (starts after 115px nav, 600px wide, below 67px title bar) */}
