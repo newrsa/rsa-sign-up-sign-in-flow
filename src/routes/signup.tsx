@@ -18,6 +18,7 @@ function SignupScreen() {
   const [mobile, setMobile] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [toastOpacity, setToastOpacity] = useState(1);
   const [seconds, setSeconds] = useState(60);
 
   const isValid = /^\d{10}$/.test(mobile);
@@ -31,8 +32,13 @@ function SignupScreen() {
 
   useEffect(() => {
     if (!showToast) return;
-    const t = setTimeout(() => setShowToast(false), 4000);
-    return () => clearTimeout(t);
+    setToastOpacity(1);
+    const fadeTimer = setTimeout(() => setToastOpacity(0), 15000);
+    const hideTimer = setTimeout(() => setShowToast(false), 15500);
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(hideTimer);
+    };
   }, [showToast]);
 
   const handleSend = () => {
@@ -68,18 +74,26 @@ function SignupScreen() {
       {/* Toast — sits directly under title bar, starts after primary nav */}
       {showToast && (
         <div
-          className="absolute z-40 flex items-center justify-center"
+          className="absolute z-40 flex items-center justify-start pl-6 transition-opacity duration-500"
           style={{
             top: 67,
             left: 115,
             right: 0,
             height: 45,
-            backgroundImage: `url(${toastBg.url})`,
-            backgroundSize: "100% 100%",
-            backgroundRepeat: "no-repeat",
+            opacity: toastOpacity,
           }}
         >
+          <div
+            className="absolute inset-0 -z-10"
+            style={{
+              backgroundImage: `url(${toastBg.url})`,
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
+              opacity: 0.7,
+            }}
+          />
           <p
+            className="text-left"
             style={{
               fontFamily: "DM Sans, sans-serif",
               fontWeight: 600,
