@@ -213,7 +213,7 @@ export function AspirationalCopy({
   const active = allMessages[index] ?? allMessages[0];
 
   return (
-    <div className="absolute z-10" style={{ left: 715 + 44, bottom: 320, width: 725 - 44 - 44 }}>
+    <div className="absolute z-10" style={{ left: 715 + 44, top: 467, width: 725 - 44 - 44 }}>
       <div
         className="transition-opacity duration-300 ease-out"
         style={{ opacity: fading ? 0 : 1 }}
