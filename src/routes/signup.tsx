@@ -16,6 +16,7 @@ export const Route = createFileRoute("/signup")({
 
 function SignupScreen() {
   const [mobile, setMobile] = useState("");
+  const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastOpacity, setToastOpacity] = useState(1);
@@ -43,6 +44,7 @@ function SignupScreen() {
 
   const handleSend = () => {
     if (!isValid) return;
+    setOtp("");
     setOtpSent(true);
     setSeconds(60);
     setShowToast(true);
@@ -114,8 +116,8 @@ function SignupScreen() {
               placeholder="Enter OTP"
               inputMode="numeric"
               maxLength={6}
-              value=""
-              onChange={() => {}}
+              value={otp}
+              onChange={(v) => setOtp(v.replace(/\D/g, ""))}
             />
           ) : (
             <FormInput
