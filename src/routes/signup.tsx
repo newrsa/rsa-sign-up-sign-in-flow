@@ -116,8 +116,8 @@ function SignupScreen() {
               placeholder="Enter OTP"
               inputMode="numeric"
               maxLength={6}
-              value=""
-              onChange={() => {}}
+              value={otp}
+              onChange={(v) => setOtp(v.replace(/\D/g, ""))}
             />
           ) : (
             <FormInput
