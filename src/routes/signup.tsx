@@ -44,8 +44,6 @@ function SignupScreen() {
 
   const handleSend = () => {
     if (!isValid) return;
-  const handleSend = () => {
-    if (!isValid) return;
     setOtp("");
     setOtpSent(true);
     setSeconds(60);
