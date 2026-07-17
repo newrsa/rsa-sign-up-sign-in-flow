@@ -16,6 +16,7 @@ export const Route = createFileRoute("/signup")({
 
 function SignupScreen() {
   const [mobile, setMobile] = useState("");
+  const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastOpacity, setToastOpacity] = useState(1);
