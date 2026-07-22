@@ -56,8 +56,6 @@ export function HomeSidebar({
         key={id}
         type="button"
         onClick={() => setSelected(id)}
-        onMouseEnter={() => setHovered(id)}
-        onMouseLeave={() => setHovered(null)}
         aria-label={label}
         aria-current={isSelected ? "page" : undefined}
         style={{
@@ -80,35 +78,39 @@ export function HomeSidebar({
           transition: "background 150ms ease",
         }}
       >
-        <img
-          src={icon}
-          alt=""
-          style={{ width: 20, height: 20, display: "block" }}
-        />
+        <span style={{ position: "relative", display: "inline-flex" }}>
+          <img
+            src={icon}
+            alt=""
+            onMouseEnter={() => setHovered(id)}
+            onMouseLeave={() => setHovered(null)}
+            style={{ width: 20, height: 20, display: "block" }}
+          />
+          {collapsed && hovered === id && (
+            <span
+              style={{
+                position: "absolute",
+                left: "50%",
+                bottom: "calc(100% + 6px)",
+                transform: "translateX(-50%)",
+                background: "#3D3D45",
+                color: "#FFFFFF",
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 400,
+                fontSize: 13,
+                borderRadius: 4,
+                padding: "6px 10px",
+                whiteSpace: "nowrap",
+                zIndex: 50,
+                pointerEvents: "none",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
+              }}
+            >
+              {label}
+            </span>
+          )}
+        </span>
         {!collapsed && <span style={{ whiteSpace: "nowrap" }}>{label}</span>}
-        {collapsed && hovered === id && (
-          <span
-            style={{
-              position: "absolute",
-              left: "calc(100% + 6px)",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "#3D3D45",
-              color: "#FFFFFF",
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 400,
-              fontSize: 13,
-              borderRadius: 4,
-              padding: "6px 10px",
-              whiteSpace: "nowrap",
-              zIndex: 50,
-              pointerEvents: "none",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
-            }}
-          >
-            {label}
-          </span>
-        )}
       </button>
     );
   };
