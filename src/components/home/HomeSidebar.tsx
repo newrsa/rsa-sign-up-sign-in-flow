@@ -47,6 +47,25 @@ export function HomeSidebar({
       className="absolute top-0 left-0 z-20 flex flex-col bg-black"
       style={{ width, height: "100%", transition: "width 200ms ease" }}
     >
+      {collapsed && (
+        <img
+          src={primaryNavSvg.url}
+          alt="Primary navigation"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 115,
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "top",
+            pointerEvents: "none",
+          }}
+        />
+      )}
+      {!collapsed && (
+      <>
+
       {/* Logo area */}
       <div
         className="flex items-center"
