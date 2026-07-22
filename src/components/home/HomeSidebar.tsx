@@ -154,14 +154,24 @@ export function HomeSidebar({
         <button
           type="button"
           onClick={() => setSettingsActive((s) => !s)}
-          className="flex items-center gap-3 w-full rounded-md"
+          className="flex items-center gap-3 w-full"
           style={{
             justifyContent: collapsed ? "center" : "flex-start",
-            padding: collapsed ? 6 : "8px 12px",
-            background: settingsActive ? "#3355f6" : "transparent",
+            paddingInline: collapsed ? 0 : 12,
           }}
         >
-          <img src={iconSettings.url} alt="" style={{ width: 22, height: 22 }} />
+          <span
+            className="flex items-center justify-center"
+            style={{
+              width: 65,
+              height: 52,
+              borderRadius: 8,
+              background: settingsActive ? "#3355F6" : "transparent",
+              flexShrink: 0,
+            }}
+          >
+            <img src={iconSettings.url} alt="" style={{ width: 24, height: 24 }} />
+          </span>
           {!collapsed && (
             <span
               style={{
