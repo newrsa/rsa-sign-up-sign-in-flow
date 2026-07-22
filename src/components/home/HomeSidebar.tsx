@@ -19,13 +19,12 @@ const NAV_ITEMS: {
   id: NavId;
   label: string;
   icon: string;
-  iconOn: string;
 }[] = [
-  { id: "pathway", label: "Pathway", icon: iconPathway.url, iconOn: iconPathwayOn.url },
-  { id: "bluebook", label: "Blue Book", icon: iconBluebook.url, iconOn: iconBluebookOn.url },
-  { id: "network", label: "Network", icon: iconNetwork.url, iconOn: iconNetworkOn.url },
-  { id: "profile", label: "My Profile", icon: iconProfile.url, iconOn: iconProfileOn.url },
-  { id: "schedule", label: "Schedule", icon: iconSchedule.url, iconOn: iconScheduleOn.url },
+  { id: "pathway", label: "Pathway", icon: iconPathway.url },
+  { id: "bluebook", label: "Blue Book", icon: iconBluebook.url },
+  { id: "network", label: "Network", icon: iconNetwork.url },
+  { id: "profile", label: "My Profile", icon: iconProfile.url },
+  { id: "schedule", label: "Schedule", icon: iconSchedule.url },
 ];
 
 const ITEM_H = 52;
