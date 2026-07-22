@@ -31,7 +31,7 @@ const ITEM_H = 52;
 const ITEM_W_COLLAPSED = 65;
 const ITEM_W_EXPANDED = 184;
 
-type Selection = NavId | "settings";
+type Selection = NavId;
 
 export function HomeSidebar({
   collapsed,
