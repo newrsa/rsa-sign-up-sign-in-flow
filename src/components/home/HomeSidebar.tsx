@@ -41,6 +41,7 @@ export function HomeSidebar({
   onToggle: () => void;
 }) {
   const [selected, setSelected] = useState<Selection>(null);
+  const [hovered, setHovered] = useState<NavId | null>(null);
   const width = collapsed ? COLLAPSED_W : EXPANDED_W;
   const itemW = collapsed ? ITEM_W_COLLAPSED : ITEM_W_EXPANDED;
 
@@ -55,9 +56,12 @@ export function HomeSidebar({
         key={id}
         type="button"
         onClick={() => setSelected(id)}
+        onMouseEnter={() => setHovered(id)}
+        onMouseLeave={() => setHovered(null)}
         aria-label={label}
         aria-current={isSelected ? "page" : undefined}
         style={{
+          position: "relative",
           display: "flex",
           alignItems: "center",
           gap: 12,
@@ -82,6 +86,28 @@ export function HomeSidebar({
           style={{ width: 20, height: 20, display: "block" }}
         />
         {!collapsed && <span style={{ whiteSpace: "nowrap" }}>{label}</span>}
+        {collapsed && hovered === id && (
+          <span
+            style={{
+              position: "absolute",
+              left: "calc(100% + 12px)",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "#3D3D45",
+              color: "#FFFFFF",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 400,
+              fontSize: 13,
+              borderRadius: 4,
+              padding: "6px 10px",
+              whiteSpace: "nowrap",
+              zIndex: 50,
+              pointerEvents: "none",
+            }}
+          >
+            {label}
+          </span>
+        )}
       </button>
     );
   };
