@@ -20,6 +20,7 @@ function Home() {
   const [collapsed, setCollapsed] = useState(true);
   const [dark, setDark] = useState(true);
   const [selected, setSelected] = useState<NavId | null>(null);
+  const [showUntitledPath, setShowUntitledPath] = useState(false);
   const navWidth = collapsed ? COLLAPSED_W : EXPANDED_W;
 
   return (
