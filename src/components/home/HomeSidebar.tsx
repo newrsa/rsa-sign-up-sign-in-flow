@@ -5,6 +5,7 @@ import shortLogo from "@/assets/nav/Short_Logo.png.asset.json";
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
 import iconSettings from "@/assets/nav/icon_Settings.svg.asset.json";
 import userProfilePic from "@/assets/nav/User_Profile.svg.asset.json";
+import primaryNavSvg from "@/assets/nav/Primary_Navigation_v2.svg.asset.json";
 
 import pathwayOn from "@/assets/nav/selected_icon_Pathway.svg.asset.json";
 import pathwayOff from "@/assets/nav/No_selection_icon_Pathway.svg.asset.json";
