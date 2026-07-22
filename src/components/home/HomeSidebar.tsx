@@ -86,7 +86,7 @@ export function HomeSidebar({
         <img
           src={isSelected ? iconOn : icon}
           alt=""
-          style={{ width: 22, height: 22, display: "block" }}
+          style={{ width: 20, height: 20, display: "block" }}
         />
         {!collapsed && <span style={{ whiteSpace: "nowrap" }}>{label}</span>}
       </button>
