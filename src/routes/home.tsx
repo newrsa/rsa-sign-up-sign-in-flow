@@ -88,7 +88,7 @@ function Home() {
           </button>
         </div>
 
-        {/* Content area — empty for now */}
+        {/* Content area */}
         <main
           className="absolute"
           style={{
@@ -99,7 +99,9 @@ function Home() {
             background: "#0e0f13",
             transition: "left 200ms ease",
           }}
-        />
+        >
+          {selected === "pathway" && <PathwayLanding />}
+        </main>
       </div>
     </div>
   );
