@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import { HomeSidebar, COLLAPSED_W, EXPANDED_W } from "@/components/home/HomeSidebar";
+import { HomeSidebar, COLLAPSED_W, EXPANDED_W, type NavId } from "@/components/home/HomeSidebar";
+import { PathwayLanding } from "@/components/home/PathwayLanding";
 import titleBarAsset from "@/assets/title-bar.svg.asset.json";
 
 export const Route = createFileRoute("/home")({
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/home")({
 function Home() {
   const [collapsed, setCollapsed] = useState(true);
   const [dark, setDark] = useState(true);
+  const [selected, setSelected] = useState<NavId | null>(null);
   const navWidth = collapsed ? COLLAPSED_W : EXPANDED_W;
 
   return (
@@ -25,7 +27,12 @@ function Home() {
       style={{ background: "#0e0f13", minHeight: "100vh" }}
     >
       <div className="relative bg-black w-full" style={{ minHeight: "100vh" }}>
-        <HomeSidebar collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
+        <HomeSidebar
+          collapsed={collapsed}
+          onToggle={() => setCollapsed((c) => !c)}
+          selected={selected}
+          onSelect={setSelected}
+        />
 
         {/* Vertical divider */}
         <div
@@ -81,7 +88,7 @@ function Home() {
           </button>
         </div>
 
-        {/* Content area — empty for now */}
+        {/* Content area */}
         <main
           className="absolute"
           style={{
@@ -92,7 +99,9 @@ function Home() {
             background: "#0e0f13",
             transition: "left 200ms ease",
           }}
-        />
+        >
+          {selected === "pathway" && <PathwayLanding />}
+        </main>
       </div>
     </div>
   );
