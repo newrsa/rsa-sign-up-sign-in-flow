@@ -157,7 +157,7 @@ export function HomeSidebar({
               marginLeft: collapsed ? 0 : 4,
             }}
           />
-          {renderItem("settings", "Settings", iconSettings.url, iconSettings.url)}
+          {renderItem("settings", "Settings", iconSettings.url)}
         </div>
       </div>
 
