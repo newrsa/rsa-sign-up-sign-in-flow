@@ -1,9 +1,43 @@
-import primaryNavCollapsed from "@/assets/nav/Primary_Navigation_v2.svg.asset.json";
-import primaryNavExpanded from "@/assets/nav/Primary_Navigation_Expanded.svg.asset.json";
+import { useState } from "react";
+import fullLogo from "@/assets/rsa-logo.png.asset.json";
+import shortLogo from "@/assets/nav/Short_Logo.png.asset.json";
 import toggleIcon from "@/assets/nav/Expand_Collapse_icon.svg.asset.json";
+import iconPathway from "@/assets/nav/No_selection_icon_Pathway.svg.asset.json";
+import iconPathwayOn from "@/assets/nav/selected_icon_Pathway.svg.asset.json";
+import iconBluebook from "@/assets/nav/No_selection_icon_Bluebook.svg.asset.json";
+import iconBluebookOn from "@/assets/nav/selected_icon_Bluebook.svg.asset.json";
+import iconNetwork from "@/assets/nav/No_selection_icon_Network.svg.asset.json";
+import iconNetworkOn from "@/assets/nav/selected_icon_Network.svg.asset.json";
+import iconProfile from "@/assets/nav/No_selection_icon_User_Profile.svg.asset.json";
+import iconProfileOn from "@/assets/nav/selected_icon_User_Profile.svg.asset.json";
+import iconSchedule from "@/assets/nav/No_selection_icon_Schedule.svg.asset.json";
+import iconScheduleOn from "@/assets/nav/selected_icon_Schedule.svg.asset.json";
+import iconSettings from "@/assets/nav/icon_Settings.svg.asset.json";
+import userAvatar from "@/assets/nav/User_Profile.svg.asset.json";
 
 const COLLAPSED_W = 115;
 const EXPANDED_W = 224;
+const SELECTED_BG = "#3355F6";
+
+type NavId = "pathway" | "bluebook" | "network" | "profile" | "schedule";
+const NAV_ITEMS: {
+  id: NavId;
+  label: string;
+  icon: string;
+  iconOn: string;
+}[] = [
+  { id: "pathway", label: "Pathway", icon: iconPathway.url, iconOn: iconPathwayOn.url },
+  { id: "bluebook", label: "Blue Book", icon: iconBluebook.url, iconOn: iconBluebookOn.url },
+  { id: "network", label: "Network", icon: iconNetwork.url, iconOn: iconNetworkOn.url },
+  { id: "profile", label: "My Profile", icon: iconProfile.url, iconOn: iconProfileOn.url },
+  { id: "schedule", label: "Schedule", icon: iconSchedule.url, iconOn: iconScheduleOn.url },
+];
+
+const ITEM_H = 52;
+const ITEM_W_COLLAPSED = 65;
+const ITEM_W_EXPANDED = 184;
+
+type Selection = NavId | "settings";
 
 export function HomeSidebar({
   collapsed,
@@ -12,26 +46,128 @@ export function HomeSidebar({
   collapsed: boolean;
   onToggle: () => void;
 }) {
+  const [selected, setSelected] = useState<Selection>("pathway");
   const width = collapsed ? COLLAPSED_W : EXPANDED_W;
-  const navSrc = collapsed ? primaryNavCollapsed.url : primaryNavExpanded.url;
+  const itemW = collapsed ? ITEM_W_COLLAPSED : ITEM_W_EXPANDED;
+
+  const renderItem = (
+    id: Selection,
+    label: string,
+    icon: string,
+    iconOn: string,
+  ) => {
+    const isSelected = selected === id;
+    return (
+      <button
+        key={id}
+        type="button"
+        onClick={() => setSelected(id)}
+        aria-label={label}
+        aria-current={isSelected ? "page" : undefined}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          width: itemW,
+          height: ITEM_H,
+          borderRadius: 8,
+          background: isSelected ? SELECTED_BG : "transparent",
+          border: "none",
+          cursor: "pointer",
+          padding: collapsed ? 0 : "0 14px",
+          justifyContent: collapsed ? "center" : "flex-start",
+          color: "#FFFFFF",
+          fontFamily: "'DM Sans', sans-serif",
+          fontWeight: 500,
+          fontSize: 15,
+          transition: "background 150ms ease",
+        }}
+      >
+        <img
+          src={isSelected ? iconOn : icon}
+          alt=""
+          style={{ width: 22, height: 22, display: "block" }}
+        />
+        {!collapsed && <span style={{ whiteSpace: "nowrap" }}>{label}</span>}
+      </button>
+    );
+  };
 
   return (
     <aside
       className="absolute top-0 left-0 z-20 bg-black overflow-y-auto overflow-x-hidden"
       style={{ width, height: "100%", transition: "width 200ms ease" }}
     >
-      <img
-        src={navSrc}
-        alt="Primary navigation"
+      <div
         style={{
-          display: "block",
-          width,
-          height: 900,
-          objectFit: "cover",
-          objectPosition: "top left",
-          pointerEvents: "none",
+          minHeight: "100%",
+          display: "flex",
+          flexDirection: "column",
+          padding: collapsed ? "24px 0 24px" : "28px 20px 24px",
+          alignItems: collapsed ? "center" : "stretch",
+          gap: 0,
         }}
-      />
+      >
+        {/* Logo */}
+        <div
+          style={{
+            marginBottom: 60,
+            display: "flex",
+            justifyContent: collapsed ? "center" : "flex-start",
+            width: "100%",
+          }}
+        >
+          <img
+            src={collapsed ? shortLogo.url : fullLogo.url}
+            alt="RightStepAhead"
+            style={{
+              height: collapsed ? 32 : 28,
+              width: "auto",
+              display: "block",
+            }}
+          />
+        </div>
+
+        {/* Main nav */}
+        <nav
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            alignItems: collapsed ? "center" : "stretch",
+          }}
+        >
+          {NAV_ITEMS.map((it) => renderItem(it.id, it.label, it.icon, it.iconOn))}
+        </nav>
+
+        {/* Spacer */}
+        <div style={{ flex: 1, minHeight: 40 }} />
+
+        {/* Bottom: avatar + settings */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            alignItems: collapsed ? "center" : "flex-start",
+            width: "100%",
+          }}
+        >
+          <img
+            src={userAvatar.url}
+            alt="Your profile"
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 8,
+              display: "block",
+              marginLeft: collapsed ? 0 : 4,
+            }}
+          />
+          {renderItem("settings", "Settings", iconSettings.url, iconSettings.url)}
+        </div>
+      </div>
+
       <button
         type="button"
         onClick={onToggle}
