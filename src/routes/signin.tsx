@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff, Info, Check } from "lucide-react";
 import { FigmaShell } from "@/components/figma/Shell";
-import { AspirationalCopy, FormInput, PrimaryButton } from "@/components/figma/SignupCard";
+import { AspirationalCopy, FormInput } from "@/components/figma/SignupCard";
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
 
 export const Route = createFileRoute("/signin")({
