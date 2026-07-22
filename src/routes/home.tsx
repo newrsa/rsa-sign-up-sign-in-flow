@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { HomeSidebar, COLLAPSED_W, EXPANDED_W, type NavId } from "@/components/home/HomeSidebar";
 import { PathwayLanding } from "@/components/home/PathwayLanding";
+import { UntitledPath } from "@/components/home/UntitledPath";
 import titleBarAsset from "@/assets/title-bar.svg.asset.json";
 
 export const Route = createFileRoute("/home")({
@@ -19,6 +20,7 @@ function Home() {
   const [collapsed, setCollapsed] = useState(true);
   const [dark, setDark] = useState(true);
   const [selected, setSelected] = useState<NavId | null>(null);
+  const [showUntitledPath, setShowUntitledPath] = useState(false);
   const navWidth = collapsed ? COLLAPSED_W : EXPANDED_W;
 
   return (
@@ -31,7 +33,10 @@ function Home() {
           collapsed={collapsed}
           onToggle={() => setCollapsed((c) => !c)}
           selected={selected}
-          onSelect={setSelected}
+          onSelect={(id) => {
+            setSelected(id);
+            if (id !== "pathway") setShowUntitledPath(false);
+          }}
         />
 
         {/* Vertical divider */}
@@ -100,7 +105,10 @@ function Home() {
             transition: "left 200ms ease",
           }}
         >
-          {selected === "pathway" && <PathwayLanding />}
+          {selected === "pathway" && !showUntitledPath && (
+            <PathwayLanding onCreate={() => setShowUntitledPath(true)} />
+          )}
+          {selected === "pathway" && showUntitledPath && <UntitledPath />}
         </main>
       </div>
     </div>
