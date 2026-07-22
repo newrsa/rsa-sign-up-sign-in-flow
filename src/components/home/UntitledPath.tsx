@@ -52,11 +52,11 @@ export function UntitledPath() {
         {/* Title + progress card */}
         <div
           style={{
-            margin: "24px 40px 0 40px",
-            padding: "28px 32px",
-            borderRadius: 12,
+            margin: "24px 0 0 0",
+            padding: "20px 40px",
+            borderRadius: 0,
             background: "#08080f",
-            border: "1px solid #1a1a24",
+            border: "none",
           }}
         >
           {editing ? (
