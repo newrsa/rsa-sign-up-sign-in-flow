@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send } from "lucide-react";
+import { Send, Pencil } from "lucide-react";
 import iconCanvas from "@/assets/untitled-path/icon_canvas.svg.asset.json";
 import iconGradCanvas from "@/assets/untitled-path/icon_grad_canvas.svg.asset.json";
 import iconRsabotLarge from "@/assets/untitled-path/icon_rsabot_large.svg.asset.json";
