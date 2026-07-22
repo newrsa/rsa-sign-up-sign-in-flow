@@ -90,7 +90,7 @@ export function HomeSidebar({
           <span
             style={{
               position: "absolute",
-              left: "calc(100% + 12px)",
+              left: "calc(100% + 6px)",
               top: "50%",
               transform: "translateY(-50%)",
               background: "#3D3D45",
@@ -103,6 +103,7 @@ export function HomeSidebar({
               whiteSpace: "nowrap",
               zIndex: 50,
               pointerEvents: "none",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
             }}
           >
             {label}
