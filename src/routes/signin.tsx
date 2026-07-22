@@ -27,7 +27,7 @@ function SigninScreen() {
   const [passwordError, setPasswordError] = useState(false);
 
   const canSubmit = identifier.trim().length > 0 && password.length > 0;
-  const CORRECT_PASSWORD = "Password@123";
+  const CORRECT_PASSWORD = "test";
 
   const handleSignIn = () => {
     if (!canSubmit) return;
