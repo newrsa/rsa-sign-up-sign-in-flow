@@ -192,8 +192,8 @@ export function UntitledPath() {
                 maxWidth: 520,
                 textAlign: "center",
                 fontFamily: "'Outfit', sans-serif",
-                fontWeight: 400,
-                fontSize: 16,
+                fontWeight: 300,
+                fontSize: 14,
                 lineHeight: 1.5,
                 color: "#9090B0",
               }}
