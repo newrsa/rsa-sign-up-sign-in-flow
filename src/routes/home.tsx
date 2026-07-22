@@ -33,7 +33,10 @@ function Home() {
           collapsed={collapsed}
           onToggle={() => setCollapsed((c) => !c)}
           selected={selected}
-          onSelect={setSelected}
+          onSelect={(id) => {
+            setSelected(id);
+            if (id !== "pathway") setShowUntitledPath(false);
+          }}
         />
 
         {/* Vertical divider */}
