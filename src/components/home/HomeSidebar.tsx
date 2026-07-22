@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import shortLogo from "@/assets/nav/Short_Logo.png.asset.json";
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
@@ -39,6 +39,7 @@ export function HomeSidebar({
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const width = collapsed ? COLLAPSED_W : EXPANDED_W;
+  const [activePath, setActivePath] = useState<string>(pathname);
   const [settingsActive, setSettingsActive] = useState(true);
 
   return (
@@ -76,11 +77,12 @@ export function HomeSidebar({
       {/* Nav items */}
       <nav className="flex flex-col gap-2 mt-24" style={{ paddingInline: collapsed ? 0 : 16 }}>
         {items.map((item) => {
-          const active = pathname === item.to;
+          const active = activePath === item.to;
           return (
-            <Link
+            <button
               key={item.label}
-              to={item.to}
+              type="button"
+              onClick={() => setActivePath(item.to)}
               className="flex items-center gap-3 rounded-md py-3 transition-colors hover:bg-white/5"
               style={{
                 paddingInline: collapsed ? 0 : 12,
@@ -100,7 +102,7 @@ export function HomeSidebar({
                   {item.label}
                 </span>
               )}
-            </Link>
+            </button>
           );
         })}
       </nav>
