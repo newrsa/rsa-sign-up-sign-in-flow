@@ -68,7 +68,7 @@ export function UntitledPath() {
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === "Escape") setEditing(false);
               }}
-              className="bg-transparent outline-none border-0 w-full"
+              className="bg-transparent outline-none border-0 w-full font-semibold"
               style={{
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 600,
