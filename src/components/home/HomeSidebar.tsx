@@ -48,7 +48,6 @@ export function HomeSidebar({
     id: Selection,
     label: string,
     icon: string,
-    iconOn: string,
   ) => {
     const isSelected = selected === id;
     return (
@@ -71,14 +70,14 @@ export function HomeSidebar({
           padding: collapsed ? 0 : "0 14px",
           justifyContent: collapsed ? "center" : "flex-start",
           color: "#FFFFFF",
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 500,
-          fontSize: 15,
+          fontFamily: "'Outfit', sans-serif",
+          fontWeight: isSelected ? 600 : 400,
+          fontSize: 18,
           transition: "background 150ms ease",
         }}
       >
         <img
-          src={isSelected ? iconOn : icon}
+          src={icon}
           alt=""
           style={{ width: 20, height: 20, display: "block" }}
         />
