@@ -180,7 +180,7 @@ function SigninScreen() {
           {/* Sign In button */}
           <button
             type="button"
-            onClick={() => canSubmit && navigate({ to: "/home" })}
+            onClick={handleSignIn}
             disabled={!canSubmit}
             className="w-full flex items-center justify-center rounded px-4 py-[10px] font-bold text-white mt-8"
             style={{
