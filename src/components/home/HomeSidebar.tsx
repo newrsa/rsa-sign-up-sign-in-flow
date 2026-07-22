@@ -2,16 +2,11 @@ import { useState } from "react";
 import fullLogo from "@/assets/rsa-logo.png.asset.json";
 import shortLogo from "@/assets/nav/Short_Logo.png.asset.json";
 import toggleIcon from "@/assets/nav/Expand_Collapse_icon.svg.asset.json";
-import iconPathway from "@/assets/nav/No_selection_icon_Pathway.svg.asset.json";
-import iconPathwayOn from "@/assets/nav/selected_icon_Pathway.svg.asset.json";
-import iconBluebook from "@/assets/nav/No_selection_icon_Bluebook.svg.asset.json";
-import iconBluebookOn from "@/assets/nav/selected_icon_Bluebook.svg.asset.json";
-import iconNetwork from "@/assets/nav/No_selection_icon_Network.svg.asset.json";
-import iconNetworkOn from "@/assets/nav/selected_icon_Network.svg.asset.json";
-import iconProfile from "@/assets/nav/No_selection_icon_User_Profile.svg.asset.json";
-import iconProfileOn from "@/assets/nav/selected_icon_User_Profile.svg.asset.json";
-import iconSchedule from "@/assets/nav/No_selection_icon_Schedule.svg.asset.json";
-import iconScheduleOn from "@/assets/nav/selected_icon_Schedule.svg.asset.json";
+import iconPathway from "@/assets/nav/inline/icon_pathway.svg.asset.json";
+import iconBluebook from "@/assets/nav/inline/icon_bluebook.svg.asset.json";
+import iconNetwork from "@/assets/nav/inline/icon_network.svg.asset.json";
+import iconProfile from "@/assets/nav/inline/icon_user_profile.svg.asset.json";
+import iconSchedule from "@/assets/nav/inline/icon_schedule.svg.asset.json";
 import iconSettings from "@/assets/nav/icon_Settings.svg.asset.json";
 import userAvatar from "@/assets/nav/User_Profile.svg.asset.json";
 
@@ -24,13 +19,12 @@ const NAV_ITEMS: {
   id: NavId;
   label: string;
   icon: string;
-  iconOn: string;
 }[] = [
-  { id: "pathway", label: "Pathway", icon: iconPathway.url, iconOn: iconPathwayOn.url },
-  { id: "bluebook", label: "Blue Book", icon: iconBluebook.url, iconOn: iconBluebookOn.url },
-  { id: "network", label: "Network", icon: iconNetwork.url, iconOn: iconNetworkOn.url },
-  { id: "profile", label: "My Profile", icon: iconProfile.url, iconOn: iconProfileOn.url },
-  { id: "schedule", label: "Schedule", icon: iconSchedule.url, iconOn: iconScheduleOn.url },
+  { id: "pathway", label: "Pathway", icon: iconPathway.url },
+  { id: "bluebook", label: "Blue Book", icon: iconBluebook.url },
+  { id: "network", label: "Network", icon: iconNetwork.url },
+  { id: "profile", label: "My Profile", icon: iconProfile.url },
+  { id: "schedule", label: "Schedule", icon: iconSchedule.url },
 ];
 
 const ITEM_H = 52;
@@ -54,7 +48,6 @@ export function HomeSidebar({
     id: Selection,
     label: string,
     icon: string,
-    iconOn: string,
   ) => {
     const isSelected = selected === id;
     return (
@@ -77,14 +70,14 @@ export function HomeSidebar({
           padding: collapsed ? 0 : "0 14px",
           justifyContent: collapsed ? "center" : "flex-start",
           color: "#FFFFFF",
-          fontFamily: "'DM Sans', sans-serif",
-          fontWeight: 500,
-          fontSize: 15,
+          fontFamily: "'Outfit', sans-serif",
+          fontWeight: isSelected ? 600 : 400,
+          fontSize: 18,
           transition: "background 150ms ease",
         }}
       >
         <img
-          src={isSelected ? iconOn : icon}
+          src={icon}
           alt=""
           style={{ width: 20, height: 20, display: "block" }}
         />
@@ -137,7 +130,7 @@ export function HomeSidebar({
             alignItems: collapsed ? "center" : "stretch",
           }}
         >
-          {NAV_ITEMS.map((it) => renderItem(it.id, it.label, it.icon, it.iconOn))}
+          {NAV_ITEMS.map((it) => renderItem(it.id, it.label, it.icon))}
         </nav>
 
         {/* Spacer */}
@@ -164,7 +157,7 @@ export function HomeSidebar({
               marginLeft: collapsed ? 0 : 4,
             }}
           />
-          {renderItem("settings", "Settings", iconSettings.url, iconSettings.url)}
+          {renderItem("settings", "Settings", iconSettings.url)}
         </div>
       </div>
 
