@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import shortLogo from "@/assets/nav/Short_Logo.png.asset.json";
+
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
 import iconSettings from "@/assets/nav/icon_Settings.svg.asset.json";
 import userProfilePic from "@/assets/nav/User_Profile.svg.asset.json";
