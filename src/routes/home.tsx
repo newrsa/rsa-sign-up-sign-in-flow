@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { HomeSidebar, COLLAPSED_W, EXPANDED_W, type NavId } from "@/components/home/HomeSidebar";
 import { PathwayLanding } from "@/components/home/PathwayLanding";
+import { UntitledPath } from "@/components/home/UntitledPath";
 import titleBarAsset from "@/assets/title-bar.svg.asset.json";
 
 export const Route = createFileRoute("/home")({
