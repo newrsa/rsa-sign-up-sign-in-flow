@@ -72,7 +72,7 @@ export function HomeSidebar({
           color: "#FFFFFF",
           fontFamily: "'Outfit', sans-serif",
           fontWeight: isSelected ? 600 : 400,
-          fontSize: 18,
+          fontSize: 16,
           transition: "background 150ms ease",
         }}
       >
