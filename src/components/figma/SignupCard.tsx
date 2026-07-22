@@ -1,5 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { Apple } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
 
 export function GoogleIcon({ className = "h-6 w-6" }: { className?: string }) {
