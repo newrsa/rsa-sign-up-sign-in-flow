@@ -114,8 +114,8 @@ export function HomeSidebar({
 
   return (
     <aside
-      className="absolute top-0 left-0 z-20 bg-black overflow-y-auto overflow-x-hidden"
-      style={{ width, height: "100%", transition: "width 200ms ease" }}
+      className="absolute top-0 left-0 z-20 bg-black"
+      style={{ width, height: "100%", transition: "width 200ms ease", overflowY: "auto", overflowX: "visible" }}
     >
       <div
         style={{
