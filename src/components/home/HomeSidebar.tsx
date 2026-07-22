@@ -31,7 +31,7 @@ const ITEM_H = 52;
 const ITEM_W_COLLAPSED = 65;
 const ITEM_W_EXPANDED = 184;
 
-type Selection = NavId;
+type Selection = NavId | null;
 
 export function HomeSidebar({
   collapsed,
@@ -40,12 +40,12 @@ export function HomeSidebar({
   collapsed: boolean;
   onToggle: () => void;
 }) {
-  const [selected, setSelected] = useState<Selection>("pathway");
+  const [selected, setSelected] = useState<Selection>(null);
   const width = collapsed ? COLLAPSED_W : EXPANDED_W;
   const itemW = collapsed ? ITEM_W_COLLAPSED : ITEM_W_EXPANDED;
 
   const renderItem = (
-    id: Selection,
+    id: NavId,
     label: string,
     icon: string,
   ) => {
