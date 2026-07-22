@@ -82,6 +82,7 @@ export function PathwayLanding({ onCreate }: { onCreate?: () => void }) {
         {/* Create New Aspiration button */}
         <button
           type="button"
+          onClick={onCreate}
           style={{
             marginTop: 40,
             padding: 0,
