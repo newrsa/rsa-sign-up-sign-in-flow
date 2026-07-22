@@ -14,7 +14,7 @@ const COLLAPSED_W = 115;
 const EXPANDED_W = 224;
 const SELECTED_BG = "#3355F6";
 
-type NavId = "pathway" | "bluebook" | "network" | "profile" | "schedule";
+export type NavId = "pathway" | "bluebook" | "network" | "profile" | "schedule";
 const NAV_ITEMS: {
   id: NavId;
   label: string;
