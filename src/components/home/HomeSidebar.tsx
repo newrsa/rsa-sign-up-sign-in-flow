@@ -130,7 +130,7 @@ export function HomeSidebar({
             alignItems: collapsed ? "center" : "stretch",
           }}
         >
-          {NAV_ITEMS.map((it) => renderItem(it.id, it.label, it.icon, it.iconOn))}
+          {NAV_ITEMS.map((it) => renderItem(it.id, it.label, it.icon))}
         </nav>
 
         {/* Spacer */}
