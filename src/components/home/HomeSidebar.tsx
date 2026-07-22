@@ -165,7 +165,7 @@ export function HomeSidebar({
         type="button"
         onClick={onToggle}
         aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
-        className="fixed z-30 flex items-center justify-center"
+        className="fixed z-40 flex items-center justify-center bg-black"
         style={{ left: width - 8, top: 80, width: 16, height: 10, transition: "left 200ms ease" }}
       >
         <img
