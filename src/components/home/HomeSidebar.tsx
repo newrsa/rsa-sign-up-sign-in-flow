@@ -63,22 +63,7 @@ export function HomeSidebar({
           }}
         />
       )}
-      {!collapsed && (
-      <>
-
-      {/* Logo area */}
-      <div
-        className="flex items-center"
-        style={{ height: 67, paddingLeft: collapsed ? 28 : 24 }}
-      >
-        {collapsed ? (
-          <img src={shortLogo.url} alt="RSA" style={{ height: 40, width: "auto" }} />
-        ) : (
-          <img src={rsaLogo.url} alt="RightStepAhead" style={{ height: 32, width: "auto" }} />
-        )}
-      </div>
-
-      {/* Collapse / expand toggle */}
+      {/* Collapse / expand toggle (always visible) */}
       <button
         type="button"
         onClick={onToggle}
@@ -92,6 +77,18 @@ export function HomeSidebar({
           <ChevronLeft className="h-3 w-3 text-white" strokeWidth={2.5} />
         )}
       </button>
+
+      {!collapsed && (
+      <>
+
+      {/* Logo area */}
+      <div
+        className="flex items-center"
+        style={{ height: 67, paddingLeft: 24 }}
+      >
+        <img src={rsaLogo.url} alt="RightStepAhead" style={{ height: 32, width: "auto" }} />
+      </div>
+
 
       {/* Nav items */}
       <nav className="flex flex-col gap-2 mt-24" style={{ paddingInline: collapsed ? 0 : 16 }}>
