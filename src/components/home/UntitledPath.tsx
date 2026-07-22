@@ -84,15 +84,19 @@ export function UntitledPath() {
               title="Click to rename"
               style={{
                 margin: 0,
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
                 fontFamily: "'Outfit', sans-serif",
                 fontWeight: 600,
                 fontSize: 16,
                 color: "#FFFFFF",
                 letterSpacing: "-0.5px",
-                cursor: "text",
+                cursor: "pointer",
               }}
             >
               {title}
+              <Pencil style={{ width: 14, height: 14, color: "#9090B0" }} />
             </h1>
           )}
 
