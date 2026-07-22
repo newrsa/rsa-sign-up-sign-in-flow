@@ -24,8 +24,19 @@ function SigninScreen() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [keepLoggedIn, setKeepLoggedIn] = useState(true);
+  const [passwordError, setPasswordError] = useState(false);
 
   const canSubmit = identifier.trim().length > 0 && password.length > 0;
+  const CORRECT_PASSWORD = "Password@123";
+
+  const handleSignIn = () => {
+    if (!canSubmit) return;
+    if (password !== CORRECT_PASSWORD) {
+      setPasswordError(true);
+      return;
+    }
+    navigate({ to: "/home" });
+  };
 
   return (
     <FigmaShell>
