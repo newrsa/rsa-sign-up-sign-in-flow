@@ -157,7 +157,28 @@ export function HomeSidebar({
               marginLeft: collapsed ? 0 : 4,
             }}
           />
-          {renderItem("settings", "Settings", iconSettings.url)}
+          <button
+            type="button"
+            aria-label="Settings"
+            style={{
+              width: 40,
+              height: 40,
+              padding: 0,
+              marginLeft: collapsed ? 0 : 4,
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={iconSettings.url}
+              alt=""
+              style={{ width: 40, height: 40, display: "block" }}
+            />
+          </button>
         </div>
       </div>
 
