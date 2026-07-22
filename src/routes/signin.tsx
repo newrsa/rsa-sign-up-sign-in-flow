@@ -106,12 +106,15 @@ function SigninScreen() {
           </div>
           <div
             className="flex items-center rounded border pl-3 pr-3"
-            style={{ background: "#08081a", borderColor: "#393948" }}
+            style={{ background: "#08081a", borderColor: passwordError ? "#DA4545" : "#393948" }}
           >
             <input
               type={showPassword ? "text" : "password"}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (passwordError) setPasswordError(false);
+              }}
               placeholder="Password"
               className="w-full bg-transparent outline-none py-3"
               style={{
@@ -131,6 +134,19 @@ function SigninScreen() {
               {showPassword ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
             </button>
           </div>
+          {passwordError && (
+            <div
+              style={{
+                marginTop: 6,
+                fontSize: 12,
+                color: "#DA4545",
+                fontFamily: "Outfit, sans-serif",
+                fontWeight: 500,
+              }}
+            >
+              Incorrect Password
+            </div>
+          )}
 
           {/* Keep me logged in */}
           <button
