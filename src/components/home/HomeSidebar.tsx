@@ -121,20 +121,27 @@ export function HomeSidebar({
           />
         </div>
 
-        {/* Main nav */}
-        <nav
+        {/* Main nav — vertically centered */}
+        <div
           style={{
+            flex: 1,
             display: "flex",
-            flexDirection: "column",
-            gap: 8,
-            alignItems: collapsed ? "center" : "stretch",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
           }}
         >
-          {NAV_ITEMS.map((it) => renderItem(it.id, it.label, it.icon))}
-        </nav>
-
-        {/* Spacer */}
-        <div style={{ flex: 1, minHeight: 40 }} />
+          <nav
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+              alignItems: collapsed ? "center" : "stretch",
+            }}
+          >
+            {NAV_ITEMS.map((it) => renderItem(it.id, it.label, it.icon))}
+          </nav>
+        </div>
 
         {/* Bottom: avatar + settings */}
         <div
