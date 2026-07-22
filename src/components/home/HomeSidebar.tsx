@@ -45,7 +45,7 @@ export function HomeSidebar({
   const itemW = collapsed ? ITEM_W_COLLAPSED : ITEM_W_EXPANDED;
 
   const renderItem = (
-    id: Selection,
+    id: NavId,
     label: string,
     icon: string,
   ) => {
