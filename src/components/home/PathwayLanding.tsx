@@ -2,7 +2,7 @@ import helloIcon from "@/assets/pathway/icon_hello.svg.asset.json";
 import createBtn from "@/assets/pathway/create_new_aspiration.svg.asset.json";
 import pathwayBg from "@/assets/pathway/pathway_bg.png.asset.json";
 
-export function PathwayLanding() {
+export function PathwayLanding({ onCreate }: { onCreate?: () => void }) {
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ background: "#0e0f13" }}>
       {/* Background image on the right */}
