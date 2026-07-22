@@ -13,6 +13,7 @@ import { Route as VerifyOtpEnteredRouteImport } from './routes/verify-otp-entere
 import { Route as VerifyOtpRouteImport } from './routes/verify-otp'
 import { Route as SignupMobileRouteImport } from './routes/signup-mobile'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SigninRouteImport } from './routes/signin'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -36,6 +37,11 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -50,6 +56,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/signup-mobile': typeof SignupMobileRoute
   '/verify-otp': typeof VerifyOtpRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/signup-mobile': typeof SignupMobileRoute
   '/verify-otp': typeof VerifyOtpRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/signin': typeof SigninRoute
   '/signup': typeof SignupRoute
   '/signup-mobile': typeof SignupMobileRoute
   '/verify-otp': typeof VerifyOtpRoute
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/home'
+    | '/signin'
     | '/signup'
     | '/signup-mobile'
     | '/verify-otp'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/home'
+    | '/signin'
     | '/signup'
     | '/signup-mobile'
     | '/verify-otp'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/home'
+    | '/signin'
     | '/signup'
     | '/signup-mobile'
     | '/verify-otp'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HomeRoute: typeof HomeRoute
+  SigninRoute: typeof SigninRoute
   SignupRoute: typeof SignupRoute
   SignupMobileRoute: typeof SignupMobileRoute
   VerifyOtpRoute: typeof VerifyOtpRoute
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/home': {
       id: '/home'
       path: '/home'
@@ -158,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomeRoute: HomeRoute,
+  SigninRoute: SigninRoute,
   SignupRoute: SignupRoute,
   SignupMobileRoute: SignupMobileRoute,
   VerifyOtpRoute: VerifyOtpRoute,

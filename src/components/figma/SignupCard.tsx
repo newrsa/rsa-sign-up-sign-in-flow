@@ -1,5 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { Apple } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
 
 export function GoogleIcon({ className = "h-6 w-6" }: { className?: string }) {
@@ -83,9 +84,9 @@ export function SignupCard({
         <p style={{ fontSize: 12, color: "#6b6b76", fontFamily: "DM Sans, sans-serif" }}>
           Already have an account?
         </p>
-        <a href="#" className="font-semibold" style={{ fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
+        <Link to="/signin" className="font-semibold" style={{ fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
           Sign In
-        </a>
+        </Link>
       </div>
       <a href="#" className="absolute font-semibold text-right" style={{ right: 38, top: 540, fontSize: 12, color: "#6177ff", fontFamily: "Outfit, sans-serif" }}>
         Forgot Password?
