@@ -105,7 +105,10 @@ function Home() {
             transition: "left 200ms ease",
           }}
         >
-          {selected === "pathway" && <PathwayLanding />}
+          {selected === "pathway" && !showUntitledPath && (
+            <PathwayLanding onCreate={() => setShowUntitledPath(true)} />
+          )}
+          {selected === "pathway" && showUntitledPath && <UntitledPath />}
         </main>
       </div>
     </div>
