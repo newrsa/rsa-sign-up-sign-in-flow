@@ -97,7 +97,7 @@ export function UntitledPath() {
           )}
 
           {/* Progress bar */}
-          <div style={{ marginTop: 28 }}>
+          <div style={{ marginTop: 12 }}>
             <div
               style={{
                 position: "relative",
