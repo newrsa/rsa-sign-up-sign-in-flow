@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouterState } from "@tanstack/react-router";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import shortLogo from "@/assets/nav/Short_Logo.png.asset.json";
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
@@ -37,9 +37,8 @@ export function HomeSidebar({
   collapsed: boolean;
   onToggle: () => void;
 }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const width = collapsed ? COLLAPSED_W : EXPANDED_W;
-  const [activePath, setActivePath] = useState<string>(pathname);
+  const [activePath, setActivePath] = useState<string>("/home");
   const [settingsActive, setSettingsActive] = useState(true);
 
   return (
