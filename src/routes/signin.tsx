@@ -193,10 +193,6 @@ function SigninScreen() {
         </div>
       </div>
 
-      {/* Spacer to preserve overall page height parity with signup */}
-      <div style={{ position: "absolute", top: CARD_TOP + 620, left: 0, width: 1, height: 1 }} />
-      {/* Hidden reference to PrimaryButton to keep import tree consistent if needed */}
-      {false && <PrimaryButton label="" top={0} />}
     </FigmaShell>
   );
 }
