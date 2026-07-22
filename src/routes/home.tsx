@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import { HomeSidebar, COLLAPSED_W, EXPANDED_W } from "@/components/home/HomeSidebar";
+import { HomeSidebar, COLLAPSED_W, EXPANDED_W, type NavId } from "@/components/home/HomeSidebar";
+import { PathwayLanding } from "@/components/home/PathwayLanding";
 import titleBarAsset from "@/assets/title-bar.svg.asset.json";
 
 export const Route = createFileRoute("/home")({
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/home")({
 function Home() {
   const [collapsed, setCollapsed] = useState(true);
   const [dark, setDark] = useState(true);
+  const [selected, setSelected] = useState<NavId | null>(null);
   const navWidth = collapsed ? COLLAPSED_W : EXPANDED_W;
 
   return (
