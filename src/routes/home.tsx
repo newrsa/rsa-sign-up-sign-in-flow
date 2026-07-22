@@ -27,7 +27,12 @@ function Home() {
       style={{ background: "#0e0f13", minHeight: "100vh" }}
     >
       <div className="relative bg-black w-full" style={{ minHeight: "100vh" }}>
-        <HomeSidebar collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
+        <HomeSidebar
+          collapsed={collapsed}
+          onToggle={() => setCollapsed((c) => !c)}
+          selected={selected}
+          onSelect={setSelected}
+        />
 
         {/* Vertical divider */}
         <div
