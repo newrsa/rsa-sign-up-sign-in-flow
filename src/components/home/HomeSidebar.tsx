@@ -82,13 +82,24 @@ export function HomeSidebar({
               key={item.label}
               type="button"
               onClick={() => setActivePath(item.to)}
-              className="flex items-center gap-3 rounded-md py-3 transition-colors hover:bg-white/5"
+              className="flex items-center gap-3 transition-colors"
               style={{
                 paddingInline: collapsed ? 0 : 12,
                 justifyContent: collapsed ? "center" : "flex-start",
               }}
             >
-              <img src={active ? item.on : item.off} alt="" style={{ width: 24, height: 24 }} />
+              <span
+                className="flex items-center justify-center"
+                style={{
+                  width: 65,
+                  height: 52,
+                  borderRadius: 8,
+                  background: active ? "#3355F6" : "transparent",
+                  flexShrink: 0,
+                }}
+              >
+                <img src={active ? item.on : item.off} alt="" style={{ width: 24, height: 24 }} />
+              </span>
               {!collapsed && (
                 <span
                   style={{
