@@ -203,6 +203,8 @@ export function HomeSidebar({
           )}
         </button>
       </div>
+      </>
+      )}
     </aside>
   );
 }
