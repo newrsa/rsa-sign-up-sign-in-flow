@@ -71,8 +71,8 @@ export function HomeSidebar({
           justifyContent: collapsed ? "center" : "flex-start",
           color: "#FFFFFF",
           fontFamily: "'Outfit', sans-serif",
-          fontWeight: isSelected ? 600 : 400,
-          fontSize: 16,
+          fontWeight: 500,
+          fontSize: 14,
           transition: "background 150ms ease",
         }}
       >
