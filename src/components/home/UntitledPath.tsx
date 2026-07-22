@@ -246,7 +246,7 @@ export function UntitledPath() {
                         margin: 0,
                         fontFamily: "'Outfit', sans-serif",
                         fontWeight: 700,
-                        fontSize: 16,
+                        fontSize: 14,
                         color: "#FFFFFF",
                       }}
                     >
@@ -256,7 +256,7 @@ export function UntitledPath() {
                       style={{
                         margin: "4px 0 0",
                         fontFamily: "'Outfit', sans-serif",
-                        fontWeight: 400,
+                        fontWeight: 300,
                         fontSize: 13,
                         lineHeight: 1.35,
                         color: "#D8D8E0",
