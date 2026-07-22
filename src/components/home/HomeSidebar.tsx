@@ -36,11 +36,16 @@ type Selection = NavId | null;
 export function HomeSidebar({
   collapsed,
   onToggle,
+  selected: selectedProp,
+  onSelect,
 }: {
   collapsed: boolean;
   onToggle: () => void;
+  selected?: Selection;
+  onSelect?: (id: NavId) => void;
 }) {
-  const [selected, setSelected] = useState<Selection>(null);
+  const [selectedState, setSelectedState] = useState<Selection>(null);
+  const selected = selectedProp !== undefined ? selectedProp : selectedState;
   const [hovered, setHovered] = useState<NavId | null>(null);
   const width = collapsed ? COLLAPSED_W : EXPANDED_W;
   const itemW = collapsed ? ITEM_W_COLLAPSED : ITEM_W_EXPANDED;
@@ -55,7 +60,10 @@ export function HomeSidebar({
       <button
         key={id}
         type="button"
-        onClick={() => setSelected(id)}
+        onClick={() => {
+          if (onSelect) onSelect(id);
+          else setSelectedState(id);
+        }}
         aria-label={label}
         aria-current={isSelected ? "page" : undefined}
         style={{
