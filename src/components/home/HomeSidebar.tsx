@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import shortLogo from "@/assets/nav/Short_Logo.png.asset.json";
+
 import rsaLogo from "@/assets/rsa-logo.png.asset.json";
 import iconSettings from "@/assets/nav/icon_Settings.svg.asset.json";
 import userProfilePic from "@/assets/nav/User_Profile.svg.asset.json";
+import primaryNavSvg from "@/assets/nav/Primary_Navigation_v2.svg.asset.json";
 
 import pathwayOn from "@/assets/nav/selected_icon_Pathway.svg.asset.json";
 import pathwayOff from "@/assets/nav/No_selection_icon_Pathway.svg.asset.json";
@@ -46,19 +47,23 @@ export function HomeSidebar({
       className="absolute top-0 left-0 z-20 flex flex-col bg-black"
       style={{ width, height: "100%", transition: "width 200ms ease" }}
     >
-      {/* Logo area */}
-      <div
-        className="flex items-center"
-        style={{ height: 67, paddingLeft: collapsed ? 28 : 24 }}
-      >
-        {collapsed ? (
-          <img src={shortLogo.url} alt="RSA" style={{ height: 40, width: "auto" }} />
-        ) : (
-          <img src={rsaLogo.url} alt="RightStepAhead" style={{ height: 32, width: "auto" }} />
-        )}
-      </div>
-
-      {/* Collapse / expand toggle */}
+      {collapsed && (
+        <img
+          src={primaryNavSvg.url}
+          alt="Primary navigation"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 115,
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "top",
+            pointerEvents: "none",
+          }}
+        />
+      )}
+      {/* Collapse / expand toggle (always visible) */}
       <button
         type="button"
         onClick={onToggle}
@@ -72,6 +77,18 @@ export function HomeSidebar({
           <ChevronLeft className="h-3 w-3 text-white" strokeWidth={2.5} />
         )}
       </button>
+
+      {!collapsed && (
+      <>
+
+      {/* Logo area */}
+      <div
+        className="flex items-center"
+        style={{ height: 67, paddingLeft: 24 }}
+      >
+        <img src={rsaLogo.url} alt="RightStepAhead" style={{ height: 32, width: "auto" }} />
+      </div>
+
 
       {/* Nav items */}
       <nav className="flex flex-col gap-2 mt-24" style={{ paddingInline: collapsed ? 0 : 16 }}>
@@ -186,6 +203,8 @@ export function HomeSidebar({
           )}
         </button>
       </div>
+      </>
+      )}
     </aside>
   );
 }
