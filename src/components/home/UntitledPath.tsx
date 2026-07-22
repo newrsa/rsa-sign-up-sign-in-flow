@@ -71,8 +71,8 @@ export function UntitledPath() {
               className="bg-transparent outline-none border-0 w-full"
               style={{
                 fontFamily: "'Outfit', sans-serif",
-                fontWeight: 700,
-                fontSize: 32,
+                fontWeight: 600,
+                fontSize: 16,
                 color: "#FFFFFF",
                 letterSpacing: "-0.5px",
                 padding: 0,
@@ -85,8 +85,8 @@ export function UntitledPath() {
               style={{
                 margin: 0,
                 fontFamily: "'Outfit', sans-serif",
-                fontWeight: 700,
-                fontSize: 32,
+                fontWeight: 600,
+                fontSize: 16,
                 color: "#FFFFFF",
                 letterSpacing: "-0.5px",
                 cursor: "text",
