@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { FigmaShell } from "@/components/figma/Shell";
 import {
@@ -15,6 +15,7 @@ export const Route = createFileRoute("/signup")({
 });
 
 function SignupScreen() {
+  const navigate = useNavigate();
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
@@ -184,7 +185,7 @@ function SignupScreen() {
           <PrimaryButton
             label={otpSent ? "Verify Code" : "Send OTP"}
             top={otpSent ? 468 : 440}
-            onClick={otpSent ? undefined : handleSend}
+            onClick={otpSent ? () => navigate({ to: "/home" }) : handleSend}
             disabled={!otpSent && !isValid}
           />
         }
