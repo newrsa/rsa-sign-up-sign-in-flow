@@ -219,173 +219,224 @@ function PathTabs({
   );
 }
 
-function TimelineView({
+type PhaseStatus = "ACTIVE" | "UP NEXT";
+
+function PhaseBlock({
+  title,
+  description,
+  status,
+  tasks,
   checks,
   onToggle,
   expanded,
   onToggleExpanded,
 }: {
+  title: string;
+  description: string;
+  status: PhaseStatus;
+  tasks: string[];
   checks: boolean[];
   onToggle: (i: number) => void;
   expanded: boolean;
   onToggleExpanded: () => void;
 }) {
+  const statusColor = status === "ACTIVE" ? "#5BB947" : "#E8A33D";
+  const statusBg = status === "ACTIVE" ? "rgba(91,185,71,0.12)" : "rgba(232,163,61,0.12)";
   return (
-    <div style={{ padding: "24px 40px" }}>
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-        <button
-          type="button"
-          onClick={onToggleExpanded}
-          style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer", marginTop: 4 }}
-          aria-label={expanded ? "Collapse" : "Expand"}
-        >
-          <img src={(expanded ? iconAccClose : iconAccOpen).url} alt="" style={{ width: 16, height: 16 }} />
-        </button>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-            <h3
-              style={{
-                margin: 0,
-                fontFamily: OUTFIT,
-                fontWeight: 600,
-                fontSize: 18,
-                color: "#FFFFFF",
-              }}
-            >
-              Class 8–9 (Now) — Build Foundations
-            </h3>
-            <span
-              style={{
-                padding: "4px 10px",
-                borderRadius: 6,
-                background: "rgba(91,185,71,0.12)",
-                border: "1px solid #5BB947",
-                color: "#5BB947",
-                fontFamily: OUTFIT,
-                fontWeight: 600,
-                fontSize: 11,
-                letterSpacing: "0.12em",
-                whiteSpace: "nowrap",
-              }}
-            >
-              ACTIVE
-            </span>
-          </div>
-          <p
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+      <button
+        type="button"
+        onClick={onToggleExpanded}
+        style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer", marginTop: 4 }}
+        aria-label={expanded ? "Collapse" : "Expand"}
+      >
+        <img src={(expanded ? iconAccClose : iconAccOpen).url} alt="" style={{ width: 16, height: 16 }} />
+      </button>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+          <h3 style={{ margin: 0, fontFamily: OUTFIT, fontWeight: 600, fontSize: 18, color: "#FFFFFF" }}>
+            {title}
+          </h3>
+          <span
             style={{
-              margin: "10px 0 0",
+              padding: "4px 10px",
+              borderRadius: 6,
+              background: statusBg,
+              border: `1px solid ${statusColor}`,
+              color: statusColor,
               fontFamily: OUTFIT,
-              fontWeight: 300,
-              fontSize: 14,
-              lineHeight: 1.5,
-              color: "#9090B0",
+              fontWeight: 600,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              whiteSpace: "nowrap",
             }}
           >
-            Build basics in Physics &amp; Maths. Start hobby electronics. Score 80%+.
-          </p>
+            {status}
+          </span>
+        </div>
+        <p
+          style={{
+            margin: "10px 0 0",
+            fontFamily: OUTFIT,
+            fontWeight: 300,
+            fontSize: 14,
+            lineHeight: 1.5,
+            color: "#9090B0",
+          }}
+        >
+          {description}
+        </p>
 
-          {expanded && (
-            <>
-              <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
-                {FOUNDATION_TASKS.map((task, i) => {
-                  const checked = checks[i];
-                  return (
-                    <label
-                      key={i}
+        {expanded && (
+          <>
+            <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
+              {tasks.map((task, i) => {
+                const checked = checks[i];
+                return (
+                  <label
+                    key={i}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "12px 14px",
+                      borderRadius: 8,
+                      background: "#0f0f18",
+                      border: "1px solid #1e1e2a",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onToggle(i);
+                      }}
                       style={{
+                        width: 18,
+                        height: 18,
+                        borderRadius: 4,
+                        background: checked ? "#3355F6" : "transparent",
+                        border: checked ? "1px solid #3355F6" : "1.5px solid #3a3a48",
                         display: "flex",
                         alignItems: "center",
-                        gap: 12,
-                        padding: "12px 14px",
-                        borderRadius: 8,
-                        background: "#0f0f18",
-                        border: "1px solid #1e1e2a",
-                        cursor: "pointer",
+                        justifyContent: "center",
+                        flexShrink: 0,
                       }}
                     >
-                      <span
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onToggle(i);
-                        }}
-                        style={{
-                          width: 18,
-                          height: 18,
-                          borderRadius: 4,
-                          background: checked ? "#3355F6" : "transparent",
-                          border: checked ? "1px solid #3355F6" : "1.5px solid #3a3a48",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          flexShrink: 0,
-                        }}
-                      >
-                        {checked && (
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                            <path d="M1 5L4 8L9 2" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        )}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: OUTFIT,
-                          fontWeight: 400,
-                          fontSize: 14,
-                          color: checked ? "#6b6b76" : "#E6E6EE",
-                          textDecoration: checked ? "line-through" : "none",
-                        }}
-                      >
-                        {task}
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-              <div style={{ marginTop: 18, display: "flex", gap: 10 }}>
-                <button
-                  type="button"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "10px 16px",
-                    borderRadius: 8,
-                    background: "transparent",
-                    border: "1px solid #3355F6",
-                    color: "#3355F6",
-                    fontFamily: OUTFIT,
-                    fontWeight: 500,
-                    fontSize: 14,
-                    cursor: "pointer",
-                  }}
-                >
-                  <Pencil style={{ width: 14, height: 14 }} /> Modify
-                </button>
-                <button
-                  type="button"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "10px 16px",
-                    borderRadius: 8,
-                    background: "transparent",
-                    border: "1px solid #3355F6",
-                    color: "#3355F6",
-                    fontFamily: OUTFIT,
-                    fontWeight: 500,
-                    fontSize: 14,
-                    cursor: "pointer",
-                  }}
-                >
-                  <img src={iconRsabotSmall.url} alt="" style={{ width: 16, height: 16 }} />
-                  Modify with Chat
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+                      {checked && (
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path d="M1 5L4 8L9 2" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: OUTFIT,
+                        fontWeight: 400,
+                        fontSize: 14,
+                        color: checked ? "#6b6b76" : "#E6E6EE",
+                        textDecoration: checked ? "line-through" : "none",
+                      }}
+                    >
+                      {task}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+            <div style={{ marginTop: 18, display: "flex", gap: 10 }}>
+              <button
+                type="button"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 16px",
+                  borderRadius: 8,
+                  background: "transparent",
+                  border: "1px solid #3355F6",
+                  color: "#3355F6",
+                  fontFamily: OUTFIT,
+                  fontWeight: 500,
+                  fontSize: 14,
+                  cursor: "pointer",
+                }}
+              >
+                <Pencil style={{ width: 14, height: 14 }} /> Modify
+              </button>
+              <button
+                type="button"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 16px",
+                  borderRadius: 8,
+                  background: "transparent",
+                  border: "1px solid #3355F6",
+                  color: "#3355F6",
+                  fontFamily: OUTFIT,
+                  fontWeight: 500,
+                  fontSize: 14,
+                  cursor: "pointer",
+                }}
+              >
+                <img src={iconRsabotSmall.url} alt="" style={{ width: 16, height: 16 }} />
+                Modify with Chat
+              </button>
+            </div>
+          </>
+        )}
       </div>
+    </div>
+  );
+}
+
+function TimelineView({
+  checks,
+  onToggle,
+  expanded,
+  onToggleExpanded,
+  phase2Added,
+  checks2,
+  onToggle2,
+  expanded2,
+  onToggleExpanded2,
+}: {
+  checks: boolean[];
+  onToggle: (i: number) => void;
+  expanded: boolean;
+  onToggleExpanded: () => void;
+  phase2Added: boolean;
+  checks2: boolean[];
+  onToggle2: (i: number) => void;
+  expanded2: boolean;
+  onToggleExpanded2: () => void;
+}) {
+  return (
+    <div style={{ padding: "24px 40px", display: "flex", flexDirection: "column", gap: 28 }}>
+      <PhaseBlock
+        title="Class 8–9 (Now) — Build Foundations"
+        description="Build basics in Physics & Maths. Start hobby electronics. Score 80%+."
+        status="ACTIVE"
+        tasks={FOUNDATION_TASKS}
+        checks={checks}
+        onToggle={onToggle}
+        expanded={expanded}
+        onToggleExpanded={onToggleExpanded}
+      />
+      {phase2Added && (
+        <PhaseBlock
+          title="Class 10 — ICSE Board Exams"
+          description="Score 90%+. Decide on stream. Begin entrance exam awareness."
+          status="UP NEXT"
+          tasks={PHASE2_TASKS}
+          checks={checks2}
+          onToggle={onToggle2}
+          expanded={expanded2}
+          onToggleExpanded={onToggleExpanded2}
+        />
+      )}
     </div>
   );
 }
