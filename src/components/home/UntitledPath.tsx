@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type ReactNode } from "react";
 import { Send, Pencil } from "lucide-react";
-import iconCanvas from "@/assets/untitled-path/icon_canvas.svg.asset.json";
+
 import iconGradCanvas from "@/assets/untitled-path/icon_grad_canvas.svg.asset.json";
 import iconRsabotLarge from "@/assets/untitled-path/icon_rsabot_large.svg.asset.json";
 import iconRsabotSmall from "@/assets/untitled-path/icon_rsabot_small.svg.asset.json";
@@ -627,30 +627,25 @@ export function UntitledPath() {
     <div className="absolute inset-0 flex" style={{ background: "#0e0f13" }}>
       {/* LEFT: RSA CANVAS */}
       <div className="relative flex-1 flex flex-col" style={{ borderRight: "1px solid #272735" }}>
-        {/* Header */}
-        <div className="flex items-center gap-2" style={{ padding: "28px 40px 0 40px" }}>
-          <img src={iconCanvas.url} alt="" style={{ width: 15, height: 15 }} />
-          <span
+        {/* Title + progress card */}
+        <div
+          style={{
+            padding: "20px 40px",
+            background: "#08080f",
+          }}
+        >
+          <div
             style={{
               fontFamily: OUTFIT,
               fontWeight: 600,
               fontSize: 12,
               letterSpacing: "0.12em",
               color: "#5BB947",
+              marginBottom: 12,
             }}
           >
             RSA CANVAS
-          </span>
-        </div>
-
-        {/* Title + progress card */}
-        <div
-          style={{
-            margin: "24px 0 0 0",
-            padding: "20px 40px",
-            background: "#08080f",
-          }}
-        >
+          </div>
           {editing ? (
             <input
               ref={titleInputRef}
