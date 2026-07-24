@@ -854,8 +854,10 @@ export function UntitledPath() {
                     <img
                       src={iconRsabotSmall.url}
                       alt=""
-                      style={{ width: 28, height: 28, flexShrink: 0, marginTop: 4 }}
+                      className="rsa-bot-blink"
+                      style={{ width: 24, height: 24, flexShrink: 0, marginTop: 0 }}
                     />
+
                     <div style={{ flex: 1, minWidth: 0 }}>
                       {m.content}
                       <div
