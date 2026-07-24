@@ -879,7 +879,7 @@ export function UntitledPath() {
 
               {isThinking && (
                 <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                  <img src={iconRsabotSmall.url} alt="" style={{ width: 28, height: 28 }} />
+                  <img src={iconRsabotSmall.url} alt="" className="rsa-bot-blink" style={{ width: 24, height: 24 }} />
                   <div
                     style={{
                       fontFamily: OUTFIT,
