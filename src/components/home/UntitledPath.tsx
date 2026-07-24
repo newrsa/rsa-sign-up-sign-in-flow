@@ -522,9 +522,12 @@ export function UntitledPath() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isThinking, setIsThinking] = useState(false);
   const [pathBuilt, setPathBuilt] = useState(false);
+  const [phase2Added, setPhase2Added] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("timeline");
   const [expanded, setExpanded] = useState(true);
+  const [expanded2, setExpanded2] = useState(true);
   const [checks, setChecks] = useState<boolean[]>([true, false, false, false]);
+  const [checks2, setChecks2] = useState<boolean[]>([false, false, false, false]);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -540,7 +543,7 @@ export function UntitledPath() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isThinking]);
 
-  const progressPct = pathBuilt ? 10 : 0;
+  const progressPct = phase2Added ? 20 : pathBuilt ? 10 : 0;
 
   const buildPath = () => {
     setPathBuilt(true);
@@ -562,11 +565,31 @@ export function UntitledPath() {
     setMessages((m) => [...m, { role: "user", content: trimmed }]);
     setMessage("");
 
-    const isAddToPath = /add\s+(this\s+)?to\s+my\s+(foundation|path)/i.test(trimmed);
+    const isAddPhase2 = /add\s+(this\s+)?to\s+my\s+phase\s*2/i.test(trimmed);
+    const isAddFoundation = !isAddPhase2 && /add\s+(this\s+)?to\s+my\s+(foundation|path)/i.test(trimmed);
+    const isPracticalTips = /icse\s+practical\s+tips/i.test(trimmed);
 
     setIsThinking(true);
     setTimeout(() => {
-      if (isAddToPath) {
+      if (isAddPhase2) {
+        setPhase2Added(true);
+        setActiveTab("timeline");
+        setExpanded2(true);
+        setMessages((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content: (
+              <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+                Done — I&apos;ve added <strong style={{ color: "#FFFFFF" }}>Class 10 — ICSE Board Exams</strong> as
+                Phase 2. Aim for <strong style={{ color: "#FFFFFF" }}>90%+</strong> overall, with
+                <strong style={{ color: "#FFFFFF" }}> 85%+ in Maths &amp; Science</strong> to stay on the JEE track.
+                Open the <strong style={{ color: "#FFFFFF" }}>Timeline</strong> on the left to review the tasks.
+              </div>
+            ),
+          },
+        ]);
+      } else if (isAddFoundation) {
         buildPath();
         setMessages((m) => [
           ...m,
@@ -580,15 +603,21 @@ export function UntitledPath() {
             ),
           },
         ]);
+      } else if (isPracticalTips) {
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: <PracticalTipsReply onChip={(t) => sendText(t)} /> },
+        ]);
       } else {
         setMessages((m) => [
           ...m,
-          { role: "assistant", content: <AssistantReply onAddToPath={() => sendText("Add this to my foundation phase")} /> },
+          { role: "assistant", content: <AssistantReply onChip={(t) => sendText(t)} /> },
         ]);
       }
       setIsThinking(false);
     }, 1200);
   };
+
 
   const send = () => sendText(message);
 
