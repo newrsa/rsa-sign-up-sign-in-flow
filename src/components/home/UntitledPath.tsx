@@ -629,12 +629,12 @@ export function UntitledPath() {
       <div className="relative flex-1 flex flex-col" style={{ borderRight: "1px solid #272735" }}>
         {/* Header */}
         <div className="flex items-center gap-2" style={{ padding: "28px 40px 0 40px" }}>
-          <img src={iconCanvas.url} alt="" style={{ width: 18, height: 17 }} />
+          <img src={iconCanvas.url} alt="" style={{ width: 15, height: 15 }} />
           <span
             style={{
               fontFamily: OUTFIT,
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: 12,
               letterSpacing: "0.12em",
               color: "#5BB947",
             }}
@@ -794,12 +794,12 @@ export function UntitledPath() {
       <div className="relative flex-1 flex flex-col">
         {/* Header */}
         <div className="flex items-center gap-2" style={{ padding: "28px 40px 0 40px" }}>
-          <img src={iconRsabotSmall.url} alt="" style={{ width: 16, height: 16 }} />
+          <img src={iconRsabotSmall.url} alt="" style={{ width: 14, height: 14 }} />
           <span
             style={{
               fontFamily: OUTFIT,
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: 12,
               letterSpacing: "0.12em",
             }}
           >
