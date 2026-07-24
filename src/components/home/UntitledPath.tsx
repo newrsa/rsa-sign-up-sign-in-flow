@@ -35,6 +35,13 @@ const FOUNDATION_TASKS = [
   "Score 80%+ in Maths and Science in 9th std this is important for Class 10",
 ];
 
+const PHASE2_TASKS = [
+  "Enroll in school physics practical sessions",
+  "Make a board exam strategy — Prepare ICSE-specific from April of Class 9 itself",
+  "Search for the best tuition class nearby",
+  "Attend all school practicals without fail — ICSE practical marks carry significant weight",
+];
+
 function titleCase(s: string) {
   return s
     .trim()
