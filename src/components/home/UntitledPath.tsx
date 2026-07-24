@@ -9,6 +9,11 @@ import iconVoice from "@/assets/untitled-path/icon_voice_input.svg.asset.json";
 import imgPhd from "@/assets/untitled-path/image_phd_physics.png.asset.json";
 import imgElec from "@/assets/untitled-path/image_electronics_engineer.png.asset.json";
 import imgClin from "@/assets/untitled-path/image_clinical_researcher.png.asset.json";
+import iconTimeline from "@/assets/untitled-path/tabs/icon_timeline.svg.asset.json";
+import iconCards from "@/assets/untitled-path/tabs/icon_cards.svg.asset.json";
+import iconMilestone from "@/assets/untitled-path/tabs/icon_milestone.svg.asset.json";
+import iconAccOpen from "@/assets/untitled-path/tabs/accordion_open.svg.asset.json";
+import iconAccClose from "@/assets/untitled-path/tabs/accordion_close.svg.asset.json";
 
 const CAREER_CARDS = [
   { img: imgPhd.url, title: "PhD in Physics", subtitle: "Explore the mysteries of the universe." },
@@ -22,6 +27,13 @@ type ChatMessage = {
 };
 
 const OUTFIT = "'Outfit', sans-serif";
+
+const FOUNDATION_TASKS = [
+  "Class 8–9th standard — Focus on important subjects like — Mathematics, Science",
+  "Watch and subscribe youtube channels related to learning add on as beginner",
+  "Join school's science club or the one near you",
+  "Score 80%+ in Maths and Science in 9th std this is important for Class 10",
+];
 
 function titleCase(s: string) {
   return s
@@ -38,7 +50,7 @@ function derivePathTitle(message: string): { title: string; career: string } {
   return { title: `Your path to become ${article} ${career}`, career };
 }
 
-function AssistantReply() {
+function AssistantReply({ onAddToPath }: { onAddToPath: () => void }) {
   return (
     <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
       <p style={{ margin: 0, fontWeight: 400 }}>
@@ -82,6 +94,329 @@ function AssistantReply() {
             {t}
           </button>
         ))}
+        <button
+          type="button"
+          onClick={onAddToPath}
+          style={{
+            padding: "8px 14px",
+            borderRadius: 999,
+            background: "transparent",
+            border: "1px solid #00494a",
+            color: "#00DCDF",
+            fontFamily: OUTFIT,
+            fontWeight: 500,
+            fontSize: 13,
+            cursor: "pointer",
+          }}
+        >
+          + Add this to my foundation phase
+        </button>
+      </div>
+    </div>
+  );
+}
+
+type TabKey = "timeline" | "cards" | "milestones";
+
+function PathTabs({
+  active,
+  onChange,
+}: {
+  active: TabKey;
+  onChange: (t: TabKey) => void;
+}) {
+  const tabs: { key: TabKey; label: string; icon: string }[] = [
+    { key: "timeline", label: "Timeline", icon: iconTimeline.url },
+    { key: "cards", label: "Cards", icon: iconCards.url },
+    { key: "milestones", label: "Milestones", icon: iconMilestone.url },
+  ];
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        borderTop: "1px solid #1e1e2a",
+        borderBottom: "1px solid #1e1e2a",
+        background: "#0e0f13",
+      }}
+    >
+      {tabs.map((t) => {
+        const isActive = t.key === active;
+        return (
+          <button
+            key={t.key}
+            type="button"
+            onClick={() => onChange(t.key)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              padding: "14px 0",
+              background: isActive ? "#1a1a24" : "transparent",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: OUTFIT,
+              fontWeight: isActive ? 600 : 400,
+              fontSize: 15,
+              color: isActive ? "#FFFFFF" : "#9090B0",
+            }}
+          >
+            <img
+              src={t.icon}
+              alt=""
+              style={{
+                width: 16,
+                height: 16,
+                filter: isActive ? "brightness(0) invert(1)" : "none",
+              }}
+            />
+            {t.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function TimelineView({
+  checks,
+  onToggle,
+  expanded,
+  onToggleExpanded,
+}: {
+  checks: boolean[];
+  onToggle: (i: number) => void;
+  expanded: boolean;
+  onToggleExpanded: () => void;
+}) {
+  return (
+    <div style={{ padding: "24px 40px" }}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+        <button
+          type="button"
+          onClick={onToggleExpanded}
+          style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer", marginTop: 4 }}
+          aria-label={expanded ? "Collapse" : "Expand"}
+        >
+          <img src={(expanded ? iconAccClose : iconAccOpen).url} alt="" style={{ width: 16, height: 16 }} />
+        </button>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <h3
+              style={{
+                margin: 0,
+                fontFamily: OUTFIT,
+                fontWeight: 600,
+                fontSize: 18,
+                color: "#FFFFFF",
+              }}
+            >
+              Class 8–9 (Now) — Build Foundations
+            </h3>
+            <span
+              style={{
+                padding: "4px 10px",
+                borderRadius: 6,
+                background: "rgba(91,185,71,0.12)",
+                border: "1px solid #5BB947",
+                color: "#5BB947",
+                fontFamily: OUTFIT,
+                fontWeight: 600,
+                fontSize: 11,
+                letterSpacing: "0.12em",
+                whiteSpace: "nowrap",
+              }}
+            >
+              ACTIVE
+            </span>
+          </div>
+          <p
+            style={{
+              margin: "10px 0 0",
+              fontFamily: OUTFIT,
+              fontWeight: 300,
+              fontSize: 14,
+              lineHeight: 1.5,
+              color: "#9090B0",
+            }}
+          >
+            Build basics in Physics &amp; Maths. Start hobby electronics. Score 80%+.
+          </p>
+
+          {expanded && (
+            <>
+              <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
+                {FOUNDATION_TASKS.map((task, i) => {
+                  const checked = checks[i];
+                  return (
+                    <label
+                      key={i}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 12,
+                        padding: "12px 14px",
+                        borderRadius: 8,
+                        background: "#0f0f18",
+                        border: "1px solid #1e1e2a",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <span
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onToggle(i);
+                        }}
+                        style={{
+                          width: 18,
+                          height: 18,
+                          borderRadius: 4,
+                          background: checked ? "#3355F6" : "transparent",
+                          border: checked ? "1px solid #3355F6" : "1.5px solid #3a3a48",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {checked && (
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                            <path d="M1 5L4 8L9 2" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        )}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: OUTFIT,
+                          fontWeight: 400,
+                          fontSize: 14,
+                          color: checked ? "#6b6b76" : "#E6E6EE",
+                          textDecoration: checked ? "line-through" : "none",
+                        }}
+                      >
+                        {task}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+              <div style={{ marginTop: 18, display: "flex", gap: 10 }}>
+                <button
+                  type="button"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "10px 16px",
+                    borderRadius: 8,
+                    background: "transparent",
+                    border: "1px solid #3355F6",
+                    color: "#3355F6",
+                    fontFamily: OUTFIT,
+                    fontWeight: 500,
+                    fontSize: 14,
+                    cursor: "pointer",
+                  }}
+                >
+                  <Pencil style={{ width: 14, height: 14 }} /> Modify
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "10px 16px",
+                    borderRadius: 8,
+                    background: "transparent",
+                    border: "1px solid #3355F6",
+                    color: "#3355F6",
+                    fontFamily: OUTFIT,
+                    fontWeight: 500,
+                    fontSize: 14,
+                    cursor: "pointer",
+                  }}
+                >
+                  <img src={iconRsabotSmall.url} alt="" style={{ width: 16, height: 16 }} />
+                  Modify with Chat
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CardsView({ checks }: { checks: boolean[] }) {
+  const done = checks.filter(Boolean).length;
+  return (
+    <div style={{ padding: "24px 40px" }}>
+      <div
+        style={{
+          padding: 20,
+          borderRadius: 12,
+          background: "#0f0f18",
+          border: "1px solid #1e1e2a",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <h3 style={{ margin: 0, fontFamily: OUTFIT, fontWeight: 600, fontSize: 16, color: "#FFFFFF" }}>
+            Class 8–9 (Now) — Build Foundations
+          </h3>
+          <span
+            style={{
+              padding: "4px 10px",
+              borderRadius: 6,
+              background: "rgba(91,185,71,0.12)",
+              border: "1px solid #5BB947",
+              color: "#5BB947",
+              fontFamily: OUTFIT,
+              fontWeight: 600,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+            }}
+          >
+            ACTIVE
+          </span>
+        </div>
+        <p style={{ margin: "10px 0 14px", fontFamily: OUTFIT, fontWeight: 300, fontSize: 14, color: "#9090B0" }}>
+          Build basics in Physics &amp; Maths. Start hobby electronics. Score 80%+.
+        </p>
+        <div style={{ fontFamily: OUTFIT, fontSize: 13, color: "#9090B0" }}>
+          {done} of {FOUNDATION_TASKS.length} tasks complete
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MilestonesView() {
+  return (
+    <div style={{ padding: "24px 40px" }}>
+      <div style={{ display: "flex", gap: 14 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: "50%",
+              background: "#3355F6",
+              boxShadow: "0 0 0 4px rgba(51,85,246,0.2)",
+            }}
+          />
+          <div style={{ width: 2, flex: 1, background: "#1e1e2a", marginTop: 4 }} />
+        </div>
+        <div style={{ flex: 1, paddingBottom: 20 }}>
+          <p style={{ margin: 0, fontFamily: OUTFIT, fontWeight: 600, fontSize: 15, color: "#FFFFFF" }}>
+            Class 8–9 — Build Foundations
+          </p>
+          <p style={{ margin: "4px 0 0", fontFamily: OUTFIT, fontWeight: 300, fontSize: 13, color: "#9090B0" }}>
+            Score 80%+ in Maths &amp; Science. Start Arduino projects.
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -95,6 +430,10 @@ export function UntitledPath() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isThinking, setIsThinking] = useState(false);
+  const [pathBuilt, setPathBuilt] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabKey>("timeline");
+  const [expanded, setExpanded] = useState(true);
+  const [checks, setChecks] = useState<boolean[]>([true, false, false, false]);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -110,25 +449,57 @@ export function UntitledPath() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isThinking]);
 
-  const send = () => {
-    const text = message.trim();
-    if (!text || isThinking) return;
+  const progressPct = pathBuilt ? 10 : 0;
+
+  const buildPath = () => {
+    setPathBuilt(true);
+    setActiveTab("timeline");
+    setExpanded(true);
+  };
+
+  const sendText = (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed || isThinking) return;
 
     if (!hasPath) {
-      const { title: newTitle } = derivePathTitle(text);
+      const { title: newTitle } = derivePathTitle(trimmed);
       setTitle(newTitle);
       setSubtitle("ICSE → PCM → JEE → B.E. Electronics");
       setHasPath(true);
     }
 
-    setMessages((m) => [...m, { role: "user", content: text }]);
+    setMessages((m) => [...m, { role: "user", content: trimmed }]);
     setMessage("");
+
+    const isAddToPath = /add\s+(this\s+)?to\s+my\s+(foundation|path)/i.test(trimmed);
+
     setIsThinking(true);
     setTimeout(() => {
-      setMessages((m) => [...m, { role: "assistant", content: <AssistantReply /> }]);
+      if (isAddToPath) {
+        buildPath();
+        setMessages((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content: (
+              <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+                Done — I&apos;ve added <strong style={{ color: "#FFFFFF" }}>Build Foundations</strong> to your path.
+                Open the <strong style={{ color: "#FFFFFF" }}>Timeline</strong> on the left to track your tasks.
+              </div>
+            ),
+          },
+        ]);
+      } else {
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: <AssistantReply onAddToPath={() => sendText("Add this to my foundation phase")} /> },
+        ]);
+      }
       setIsThinking(false);
-    }, 1500);
+    }, 1200);
   };
+
+  const send = () => sendText(message);
 
   const chatStarted = messages.length > 0 || isThinking;
 
@@ -229,10 +600,11 @@ export function UntitledPath() {
             >
               <div
                 style={{
-                  width: "12%",
+                  width: `${Math.max(progressPct, 12)}%`,
                   height: "100%",
                   borderRadius: 999,
                   backgroundImage: "linear-gradient(90deg, #002AF4 0%, #02D9DD 100%)",
+                  transition: "width 400ms ease",
                 }}
               />
             </div>
@@ -246,29 +618,48 @@ export function UntitledPath() {
                 color: "#9090B0",
               }}
             >
-              0% Complete
+              {progressPct}% Complete
             </div>
           </div>
         </div>
 
-        {/* Empty state */}
-        <div className="flex-1 flex flex-col items-center justify-center" style={{ paddingBottom: 60 }}>
-          <img src={iconGradCanvas.url} alt="" style={{ width: 80, height: 78 }} />
-          <p
-            style={{
-              marginTop: 28,
-              textAlign: "center",
-              maxWidth: 380,
-              fontFamily: OUTFIT,
-              fontWeight: 300,
-              fontSize: 16,
-              lineHeight: 1.5,
-              color: "#6b6b76",
-            }}
-          >
-            Chat with RSA Engine to start building your roadmap.
-          </p>
-        </div>
+        {pathBuilt ? (
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <PathTabs active={activeTab} onChange={setActiveTab} />
+            <div className="flex-1 overflow-y-auto">
+              {activeTab === "timeline" && (
+                <TimelineView
+                  checks={checks}
+                  onToggle={(i) =>
+                    setChecks((c) => c.map((v, idx) => (idx === i ? !v : v)))
+                  }
+                  expanded={expanded}
+                  onToggleExpanded={() => setExpanded((e) => !e)}
+                />
+              )}
+              {activeTab === "cards" && <CardsView checks={checks} />}
+              {activeTab === "milestones" && <MilestonesView />}
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 flex flex-col items-center justify-center" style={{ paddingBottom: 60 }}>
+            <img src={iconGradCanvas.url} alt="" style={{ width: 80, height: 78 }} />
+            <p
+              style={{
+                marginTop: 28,
+                textAlign: "center",
+                maxWidth: 380,
+                fontFamily: OUTFIT,
+                fontWeight: 300,
+                fontSize: 16,
+                lineHeight: 1.5,
+                color: "#6b6b76",
+              }}
+            >
+              Chat with RSA Engine to start building your roadmap.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* RIGHT: RSA ENGINE */}
