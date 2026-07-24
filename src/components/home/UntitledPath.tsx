@@ -989,7 +989,17 @@ export function UntitledPath() {
           0%, 80%, 100% { opacity: 0.2; }
           40% { opacity: 1; }
         }
+        @keyframes rsaBotBlink {
+          0%, 92%, 100% { transform: scaleY(1); }
+          95%, 97% { transform: scaleY(0.1); }
+        }
+        .rsa-bot-blink {
+          animation: rsaBotBlink 4s infinite ease-in-out;
+          transform-origin: center 55%;
+          will-change: transform;
+        }
       `}</style>
+
     </div>
   );
 }
