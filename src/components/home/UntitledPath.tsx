@@ -57,7 +57,41 @@ function derivePathTitle(message: string): { title: string; career: string } {
   return { title: `Your path to become ${article} ${career}`, career };
 }
 
-function AssistantReply({ onAddToPath }: { onAddToPath: () => void }) {
+function ChipButton({
+  label,
+  onClick,
+  accent,
+}: {
+  label: string;
+  onClick?: () => void;
+  accent?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        padding: "8px 14px",
+        borderRadius: 999,
+        background: "transparent",
+        border: `1px solid ${accent ? "#00494a" : "#2b2b3a"}`,
+        color: accent ? "#00DCDF" : "#FFFFFF",
+        fontFamily: OUTFIT,
+        fontWeight: accent ? 500 : 400,
+        fontSize: 13,
+        cursor: "pointer",
+      }}
+    >
+      {label}
+    </button>
+  );
+}
+
+function AssistantReply({
+  onChip,
+}: {
+  onChip: (text: string) => void;
+}) {
   return (
     <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
       <p style={{ margin: 0, fontWeight: 400 }}>
@@ -82,42 +116,41 @@ function AssistantReply({ onAddToPath }: { onAddToPath: () => void }) {
         </p>
       </div>
       <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {["Share ICSE Practical Tips", "Foundational YouTube Courses"].map((t) => (
-          <button
-            key={t}
-            type="button"
-            style={{
-              padding: "8px 14px",
-              borderRadius: 999,
-              background: "transparent",
-              border: "1px solid #2b2b3a",
-              color: "#FFFFFF",
-              fontFamily: OUTFIT,
-              fontWeight: 400,
-              fontSize: 13,
-              cursor: "pointer",
-            }}
-          >
-            {t}
-          </button>
+        <ChipButton label="Share ICSE Practical Tips" onClick={() => onChip("Share ICSE Practical Tips")} />
+        <ChipButton label="Foundational YouTube Courses" onClick={() => onChip("Foundational YouTube Courses")} />
+        <ChipButton
+          label="+ Add this to my foundation phase"
+          accent
+          onClick={() => onChip("Add this to my foundation phase")}
+        />
+      </div>
+    </div>
+  );
+}
+
+function PracticalTipsReply({ onChip }: { onChip: (text: string) => void }) {
+  const tips = [
+    "Make a board exam strategy — Prepare ICSE-specific from April of Class 9 itself",
+    "Search for the best tuition class nearby",
+    "Attend all school practicals without fail — ICSE practical marks carry significant weight",
+  ];
+  return (
+    <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+      <p style={{ margin: 0, fontWeight: 700, color: "#FFFFFF" }}>ICSE Practical Tips:</p>
+      <ul style={{ margin: "10px 0 0", paddingLeft: 18, fontWeight: 300 }}>
+        {tips.map((t) => (
+          <li key={t} style={{ marginTop: 6 }}>{t}</li>
         ))}
-        <button
-          type="button"
-          onClick={onAddToPath}
-          style={{
-            padding: "8px 14px",
-            borderRadius: 999,
-            background: "transparent",
-            border: "1px solid #00494a",
-            color: "#00DCDF",
-            fontFamily: OUTFIT,
-            fontWeight: 500,
-            fontSize: 13,
-            cursor: "pointer",
-          }}
-        >
-          + Add this to my foundation phase
-        </button>
+      </ul>
+      <p style={{ margin: "16px 0 0", fontWeight: 400, color: "#9090B0" }}>
+        Keep refining your career path until you feel confident.
+      </p>
+      <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 8 }}>
+        <ChipButton
+          label="+ Add this to my phase 2 also share any additional details like percentage"
+          accent
+          onClick={() => onChip("Add this to my phase 2 also share any additional details like percentage")}
+        />
       </div>
     </div>
   );
