@@ -93,7 +93,7 @@ function AssistantReply({
   onChip: (text: string) => void;
 }) {
   return (
-    <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+    <div style={{ color: "#9090B0", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
       <p style={{ margin: 0, fontWeight: 400 }}>
         For Class 8–9 foundation, focus on three pillars:
       </p>
@@ -580,7 +580,7 @@ export function UntitledPath() {
           {
             role: "assistant",
             content: (
-              <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+              <div style={{ color: "#9090B0", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
                 Done — I&apos;ve added <strong style={{ color: "#FFFFFF" }}>Class 10 — ICSE Board Exams</strong> as
                 Phase 2. Aim for <strong style={{ color: "#FFFFFF" }}>90%+</strong> overall, with
                 <strong style={{ color: "#FFFFFF" }}> 85%+ in Maths &amp; Science</strong> to stay on the JEE track.
@@ -596,7 +596,7 @@ export function UntitledPath() {
           {
             role: "assistant",
             content: (
-              <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+              <div style={{ color: "#9090B0", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
                 Done — I&apos;ve added <strong style={{ color: "#FFFFFF" }}>Build Foundations</strong> to your path.
                 Open the <strong style={{ color: "#FFFFFF" }}>Timeline</strong> on the left to track your tasks.
               </div>
@@ -781,7 +781,7 @@ export function UntitledPath() {
                 fontWeight: 300,
                 fontSize: 16,
                 lineHeight: 1.5,
-                color: "#6b6b76",
+                color: "#9090B0",
               }}
             >
               Chat with RSA Engine to start building your roadmap.
@@ -899,7 +899,7 @@ export function UntitledPath() {
                             fontWeight: 300,
                             fontSize: 13,
                             lineHeight: 1.35,
-                            color: "#D8D8E0",
+                            color: "#9090B0",
                           }}
                         >
                           {c.subtitle}
@@ -951,7 +951,7 @@ export function UntitledPath() {
                           fontFamily: OUTFIT,
                           fontWeight: 400,
                           fontSize: 11,
-                          color: "#6b6b76",
+                          color: "#9090B0",
                           letterSpacing: "0.08em",
                         }}
                       >
@@ -989,7 +989,7 @@ export function UntitledPath() {
                           fontFamily: OUTFIT,
                           fontWeight: 400,
                           fontSize: 11,
-                          color: "#6b6b76",
+                          color: "#9090B0",
                           letterSpacing: "0.08em",
                         }}
                       >
@@ -1099,7 +1099,7 @@ export function UntitledPath() {
               fontFamily: OUTFIT,
               fontWeight: 400,
               fontSize: 12,
-              color: "#6b6b76",
+              color: "#9090B0",
             }}
           >
             RSA Engine · Powered by Right Step Ahead intelligence
