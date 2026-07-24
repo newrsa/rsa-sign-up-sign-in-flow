@@ -35,6 +35,13 @@ const FOUNDATION_TASKS = [
   "Score 80%+ in Maths and Science in 9th std this is important for Class 10",
 ];
 
+const PHASE2_TASKS = [
+  "Enroll in school physics practical sessions",
+  "Make a board exam strategy — Prepare ICSE-specific from April of Class 9 itself",
+  "Search for the best tuition class nearby",
+  "Attend all school practicals without fail — ICSE practical marks carry significant weight",
+];
+
 function titleCase(s: string) {
   return s
     .trim()
@@ -50,7 +57,41 @@ function derivePathTitle(message: string): { title: string; career: string } {
   return { title: `Your path to become ${article} ${career}`, career };
 }
 
-function AssistantReply({ onAddToPath }: { onAddToPath: () => void }) {
+function ChipButton({
+  label,
+  onClick,
+  accent,
+}: {
+  label: string;
+  onClick?: () => void;
+  accent?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        padding: "8px 14px",
+        borderRadius: 999,
+        background: "transparent",
+        border: `1px solid ${accent ? "#00494a" : "#2b2b3a"}`,
+        color: accent ? "#00DCDF" : "#FFFFFF",
+        fontFamily: OUTFIT,
+        fontWeight: accent ? 500 : 400,
+        fontSize: 13,
+        cursor: "pointer",
+      }}
+    >
+      {label}
+    </button>
+  );
+}
+
+function AssistantReply({
+  onChip,
+}: {
+  onChip: (text: string) => void;
+}) {
   return (
     <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
       <p style={{ margin: 0, fontWeight: 400 }}>
@@ -75,42 +116,41 @@ function AssistantReply({ onAddToPath }: { onAddToPath: () => void }) {
         </p>
       </div>
       <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {["Share ICSE Practical Tips", "Foundational YouTube Courses"].map((t) => (
-          <button
-            key={t}
-            type="button"
-            style={{
-              padding: "8px 14px",
-              borderRadius: 999,
-              background: "transparent",
-              border: "1px solid #2b2b3a",
-              color: "#FFFFFF",
-              fontFamily: OUTFIT,
-              fontWeight: 400,
-              fontSize: 13,
-              cursor: "pointer",
-            }}
-          >
-            {t}
-          </button>
+        <ChipButton label="Share ICSE Practical Tips" onClick={() => onChip("Share ICSE Practical Tips")} />
+        <ChipButton label="Foundational YouTube Courses" onClick={() => onChip("Foundational YouTube Courses")} />
+        <ChipButton
+          label="+ Add this to my foundation phase"
+          accent
+          onClick={() => onChip("Add this to my foundation phase")}
+        />
+      </div>
+    </div>
+  );
+}
+
+function PracticalTipsReply({ onChip }: { onChip: (text: string) => void }) {
+  const tips = [
+    "Make a board exam strategy — Prepare ICSE-specific from April of Class 9 itself",
+    "Search for the best tuition class nearby",
+    "Attend all school practicals without fail — ICSE practical marks carry significant weight",
+  ];
+  return (
+    <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+      <p style={{ margin: 0, fontWeight: 700, color: "#FFFFFF" }}>ICSE Practical Tips:</p>
+      <ul style={{ margin: "10px 0 0", paddingLeft: 18, fontWeight: 300 }}>
+        {tips.map((t) => (
+          <li key={t} style={{ marginTop: 6 }}>{t}</li>
         ))}
-        <button
-          type="button"
-          onClick={onAddToPath}
-          style={{
-            padding: "8px 14px",
-            borderRadius: 999,
-            background: "transparent",
-            border: "1px solid #00494a",
-            color: "#00DCDF",
-            fontFamily: OUTFIT,
-            fontWeight: 500,
-            fontSize: 13,
-            cursor: "pointer",
-          }}
-        >
-          + Add this to my foundation phase
-        </button>
+      </ul>
+      <p style={{ margin: "16px 0 0", fontWeight: 400, color: "#9090B0" }}>
+        Keep refining your career path until you feel confident.
+      </p>
+      <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", gap: 8 }}>
+        <ChipButton
+          label="+ Add this to my phase 2 also share any additional details like percentage"
+          accent
+          onClick={() => onChip("Add this to my phase 2 also share any additional details like percentage")}
+        />
       </div>
     </div>
   );
@@ -179,173 +219,224 @@ function PathTabs({
   );
 }
 
-function TimelineView({
+type PhaseStatus = "ACTIVE" | "UP NEXT";
+
+function PhaseBlock({
+  title,
+  description,
+  status,
+  tasks,
   checks,
   onToggle,
   expanded,
   onToggleExpanded,
 }: {
+  title: string;
+  description: string;
+  status: PhaseStatus;
+  tasks: string[];
   checks: boolean[];
   onToggle: (i: number) => void;
   expanded: boolean;
   onToggleExpanded: () => void;
 }) {
+  const statusColor = status === "ACTIVE" ? "#5BB947" : "#E8A33D";
+  const statusBg = status === "ACTIVE" ? "rgba(91,185,71,0.12)" : "rgba(232,163,61,0.12)";
   return (
-    <div style={{ padding: "24px 40px" }}>
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-        <button
-          type="button"
-          onClick={onToggleExpanded}
-          style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer", marginTop: 4 }}
-          aria-label={expanded ? "Collapse" : "Expand"}
-        >
-          <img src={(expanded ? iconAccClose : iconAccOpen).url} alt="" style={{ width: 16, height: 16 }} />
-        </button>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-            <h3
-              style={{
-                margin: 0,
-                fontFamily: OUTFIT,
-                fontWeight: 600,
-                fontSize: 18,
-                color: "#FFFFFF",
-              }}
-            >
-              Class 8–9 (Now) — Build Foundations
-            </h3>
-            <span
-              style={{
-                padding: "4px 10px",
-                borderRadius: 6,
-                background: "rgba(91,185,71,0.12)",
-                border: "1px solid #5BB947",
-                color: "#5BB947",
-                fontFamily: OUTFIT,
-                fontWeight: 600,
-                fontSize: 11,
-                letterSpacing: "0.12em",
-                whiteSpace: "nowrap",
-              }}
-            >
-              ACTIVE
-            </span>
-          </div>
-          <p
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+      <button
+        type="button"
+        onClick={onToggleExpanded}
+        style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer", marginTop: 4 }}
+        aria-label={expanded ? "Collapse" : "Expand"}
+      >
+        <img src={(expanded ? iconAccClose : iconAccOpen).url} alt="" style={{ width: 16, height: 16 }} />
+      </button>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+          <h3 style={{ margin: 0, fontFamily: OUTFIT, fontWeight: 600, fontSize: 18, color: "#FFFFFF" }}>
+            {title}
+          </h3>
+          <span
             style={{
-              margin: "10px 0 0",
+              padding: "4px 10px",
+              borderRadius: 6,
+              background: statusBg,
+              border: `1px solid ${statusColor}`,
+              color: statusColor,
               fontFamily: OUTFIT,
-              fontWeight: 300,
-              fontSize: 14,
-              lineHeight: 1.5,
-              color: "#9090B0",
+              fontWeight: 600,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              whiteSpace: "nowrap",
             }}
           >
-            Build basics in Physics &amp; Maths. Start hobby electronics. Score 80%+.
-          </p>
+            {status}
+          </span>
+        </div>
+        <p
+          style={{
+            margin: "10px 0 0",
+            fontFamily: OUTFIT,
+            fontWeight: 300,
+            fontSize: 14,
+            lineHeight: 1.5,
+            color: "#9090B0",
+          }}
+        >
+          {description}
+        </p>
 
-          {expanded && (
-            <>
-              <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
-                {FOUNDATION_TASKS.map((task, i) => {
-                  const checked = checks[i];
-                  return (
-                    <label
-                      key={i}
+        {expanded && (
+          <>
+            <div style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 10 }}>
+              {tasks.map((task, i) => {
+                const checked = checks[i];
+                return (
+                  <label
+                    key={i}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "12px 14px",
+                      borderRadius: 8,
+                      background: "#0f0f18",
+                      border: "1px solid #1e1e2a",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onToggle(i);
+                      }}
                       style={{
+                        width: 18,
+                        height: 18,
+                        borderRadius: 4,
+                        background: checked ? "#3355F6" : "transparent",
+                        border: checked ? "1px solid #3355F6" : "1.5px solid #3a3a48",
                         display: "flex",
                         alignItems: "center",
-                        gap: 12,
-                        padding: "12px 14px",
-                        borderRadius: 8,
-                        background: "#0f0f18",
-                        border: "1px solid #1e1e2a",
-                        cursor: "pointer",
+                        justifyContent: "center",
+                        flexShrink: 0,
                       }}
                     >
-                      <span
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onToggle(i);
-                        }}
-                        style={{
-                          width: 18,
-                          height: 18,
-                          borderRadius: 4,
-                          background: checked ? "#3355F6" : "transparent",
-                          border: checked ? "1px solid #3355F6" : "1.5px solid #3a3a48",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          flexShrink: 0,
-                        }}
-                      >
-                        {checked && (
-                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                            <path d="M1 5L4 8L9 2" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        )}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: OUTFIT,
-                          fontWeight: 400,
-                          fontSize: 14,
-                          color: checked ? "#6b6b76" : "#E6E6EE",
-                          textDecoration: checked ? "line-through" : "none",
-                        }}
-                      >
-                        {task}
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-              <div style={{ marginTop: 18, display: "flex", gap: 10 }}>
-                <button
-                  type="button"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "10px 16px",
-                    borderRadius: 8,
-                    background: "transparent",
-                    border: "1px solid #3355F6",
-                    color: "#3355F6",
-                    fontFamily: OUTFIT,
-                    fontWeight: 500,
-                    fontSize: 14,
-                    cursor: "pointer",
-                  }}
-                >
-                  <Pencil style={{ width: 14, height: 14 }} /> Modify
-                </button>
-                <button
-                  type="button"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "10px 16px",
-                    borderRadius: 8,
-                    background: "transparent",
-                    border: "1px solid #3355F6",
-                    color: "#3355F6",
-                    fontFamily: OUTFIT,
-                    fontWeight: 500,
-                    fontSize: 14,
-                    cursor: "pointer",
-                  }}
-                >
-                  <img src={iconRsabotSmall.url} alt="" style={{ width: 16, height: 16 }} />
-                  Modify with Chat
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+                      {checked && (
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path d="M1 5L4 8L9 2" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: OUTFIT,
+                        fontWeight: 400,
+                        fontSize: 14,
+                        color: checked ? "#6b6b76" : "#E6E6EE",
+                        textDecoration: checked ? "line-through" : "none",
+                      }}
+                    >
+                      {task}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+            <div style={{ marginTop: 18, display: "flex", gap: 10 }}>
+              <button
+                type="button"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 16px",
+                  borderRadius: 8,
+                  background: "transparent",
+                  border: "1px solid #3355F6",
+                  color: "#3355F6",
+                  fontFamily: OUTFIT,
+                  fontWeight: 500,
+                  fontSize: 14,
+                  cursor: "pointer",
+                }}
+              >
+                <Pencil style={{ width: 14, height: 14 }} /> Modify
+              </button>
+              <button
+                type="button"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "10px 16px",
+                  borderRadius: 8,
+                  background: "transparent",
+                  border: "1px solid #3355F6",
+                  color: "#3355F6",
+                  fontFamily: OUTFIT,
+                  fontWeight: 500,
+                  fontSize: 14,
+                  cursor: "pointer",
+                }}
+              >
+                <img src={iconRsabotSmall.url} alt="" style={{ width: 16, height: 16 }} />
+                Modify with Chat
+              </button>
+            </div>
+          </>
+        )}
       </div>
+    </div>
+  );
+}
+
+function TimelineView({
+  checks,
+  onToggle,
+  expanded,
+  onToggleExpanded,
+  phase2Added,
+  checks2,
+  onToggle2,
+  expanded2,
+  onToggleExpanded2,
+}: {
+  checks: boolean[];
+  onToggle: (i: number) => void;
+  expanded: boolean;
+  onToggleExpanded: () => void;
+  phase2Added: boolean;
+  checks2: boolean[];
+  onToggle2: (i: number) => void;
+  expanded2: boolean;
+  onToggleExpanded2: () => void;
+}) {
+  return (
+    <div style={{ padding: "24px 40px", display: "flex", flexDirection: "column", gap: 28 }}>
+      <PhaseBlock
+        title="Class 8–9 (Now) — Build Foundations"
+        description="Build basics in Physics & Maths. Start hobby electronics. Score 80%+."
+        status="ACTIVE"
+        tasks={FOUNDATION_TASKS}
+        checks={checks}
+        onToggle={onToggle}
+        expanded={expanded}
+        onToggleExpanded={onToggleExpanded}
+      />
+      {phase2Added && (
+        <PhaseBlock
+          title="Class 10 — ICSE Board Exams"
+          description="Score 90%+. Decide on stream. Begin entrance exam awareness."
+          status="UP NEXT"
+          tasks={PHASE2_TASKS}
+          checks={checks2}
+          onToggle={onToggle2}
+          expanded={expanded2}
+          onToggleExpanded={onToggleExpanded2}
+        />
+      )}
     </div>
   );
 }
@@ -431,9 +522,12 @@ export function UntitledPath() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isThinking, setIsThinking] = useState(false);
   const [pathBuilt, setPathBuilt] = useState(false);
+  const [phase2Added, setPhase2Added] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("timeline");
   const [expanded, setExpanded] = useState(true);
+  const [expanded2, setExpanded2] = useState(true);
   const [checks, setChecks] = useState<boolean[]>([true, false, false, false]);
+  const [checks2, setChecks2] = useState<boolean[]>([false, false, false, false]);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -449,7 +543,7 @@ export function UntitledPath() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isThinking]);
 
-  const progressPct = pathBuilt ? 10 : 0;
+  const progressPct = phase2Added ? 20 : pathBuilt ? 10 : 0;
 
   const buildPath = () => {
     setPathBuilt(true);
@@ -471,11 +565,31 @@ export function UntitledPath() {
     setMessages((m) => [...m, { role: "user", content: trimmed }]);
     setMessage("");
 
-    const isAddToPath = /add\s+(this\s+)?to\s+my\s+(foundation|path)/i.test(trimmed);
+    const isAddPhase2 = /add\s+(this\s+)?to\s+my\s+phase\s*2/i.test(trimmed);
+    const isAddFoundation = !isAddPhase2 && /add\s+(this\s+)?to\s+my\s+(foundation|path)/i.test(trimmed);
+    const isPracticalTips = /icse\s+practical\s+tips/i.test(trimmed);
 
     setIsThinking(true);
     setTimeout(() => {
-      if (isAddToPath) {
+      if (isAddPhase2) {
+        setPhase2Added(true);
+        setActiveTab("timeline");
+        setExpanded2(true);
+        setMessages((m) => [
+          ...m,
+          {
+            role: "assistant",
+            content: (
+              <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
+                Done — I&apos;ve added <strong style={{ color: "#FFFFFF" }}>Class 10 — ICSE Board Exams</strong> as
+                Phase 2. Aim for <strong style={{ color: "#FFFFFF" }}>90%+</strong> overall, with
+                <strong style={{ color: "#FFFFFF" }}> 85%+ in Maths &amp; Science</strong> to stay on the JEE track.
+                Open the <strong style={{ color: "#FFFFFF" }}>Timeline</strong> on the left to review the tasks.
+              </div>
+            ),
+          },
+        ]);
+      } else if (isAddFoundation) {
         buildPath();
         setMessages((m) => [
           ...m,
@@ -489,15 +603,21 @@ export function UntitledPath() {
             ),
           },
         ]);
+      } else if (isPracticalTips) {
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: <PracticalTipsReply onChip={(t) => sendText(t)} /> },
+        ]);
       } else {
         setMessages((m) => [
           ...m,
-          { role: "assistant", content: <AssistantReply onAddToPath={() => sendText("Add this to my foundation phase")} /> },
+          { role: "assistant", content: <AssistantReply onChip={(t) => sendText(t)} /> },
         ]);
       }
       setIsThinking(false);
     }, 1200);
   };
+
 
   const send = () => sendText(message);
 
@@ -635,7 +755,15 @@ export function UntitledPath() {
                   }
                   expanded={expanded}
                   onToggleExpanded={() => setExpanded((e) => !e)}
+                  phase2Added={phase2Added}
+                  checks2={checks2}
+                  onToggle2={(i) =>
+                    setChecks2((c) => c.map((v, idx) => (idx === i ? !v : v)))
+                  }
+                  expanded2={expanded2}
+                  onToggleExpanded2={() => setExpanded2((e) => !e)}
                 />
+
               )}
               {activeTab === "cards" && <CardsView checks={checks} />}
               {activeTab === "milestones" && <MilestonesView />}
