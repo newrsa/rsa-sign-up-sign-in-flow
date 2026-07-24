@@ -851,12 +851,7 @@ export function UntitledPath() {
                   </div>
                 ) : (
                   <div key={i} style={{ display: "flex", gap: 12 }}>
-                    <img
-                      src={iconRsabotSmall.url}
-                      alt=""
-                      className="rsa-bot-blink"
-                      style={{ width: 24, height: 24, flexShrink: 0, marginTop: 0 }}
-                    />
+                    <BotIconSmallBlink size={24} style={{ flexShrink: 0, marginTop: 0 }} />
 
                     <div style={{ flex: 1, minWidth: 0 }}>
                       {m.content}
@@ -879,7 +874,7 @@ export function UntitledPath() {
 
               {isThinking && (
                 <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                  <img src={iconRsabotSmall.url} alt="" className="rsa-bot-blink" style={{ width: 24, height: 24 }} />
+                  <BotIconSmallBlink size={24} />
                   <div
                     style={{
                       fontFamily: OUTFIT,
@@ -989,18 +984,29 @@ export function UntitledPath() {
           0%, 80%, 100% { opacity: 0.2; }
           40% { opacity: 1; }
         }
-        @keyframes rsaBotBlink {
+        @keyframes rsaEyeBlink {
           0%, 92%, 100% { transform: scaleY(1); }
           95%, 97% { transform: scaleY(0.1); }
         }
-        .rsa-bot-blink {
-          animation: rsaBotBlink 4s infinite ease-in-out;
-          transform-origin: center 55%;
+        .rsa-bot-eye {
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: rsaEyeBlink 4s infinite ease-in-out;
           will-change: transform;
         }
       `}</style>
 
     </div>
+  );
+}
+
+function BotIconSmallBlink({ size = 24, style }: { size?: number; style?: React.CSSProperties }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={style} aria-hidden>
+      <path d="M9 1.33398C9 1.63015 8.87127 1.89624 8.66667 2.07935V3.33398H12C13.1046 3.33398 14 4.22942 14 5.33398V12.0007C14 13.1053 13.1046 14.0007 12 14.0007H4C2.89543 14.0007 2 13.1053 2 12.0007V5.33398C2 4.22942 2.89543 3.33398 4 3.33398H7.33333V2.07935C7.12873 1.89624 7 1.63015 7 1.33398C7 0.781698 7.44773 0.333984 8 0.333984C8.55227 0.333984 9 0.781698 9 1.33398ZM4 4.66732C3.63181 4.66732 3.33333 4.9658 3.33333 5.33398V12.0007C3.33333 12.3689 3.63181 12.6673 4 12.6673H12C12.3682 12.6673 12.6667 12.3689 12.6667 12.0007V5.33398C12.6667 4.9658 12.3682 4.66732 12 4.66732H8.66667H7.33333H4ZM1.33333 6.66732H0V10.6673H1.33333V6.66732ZM14.6667 6.66732H16V10.6673H14.6667V6.66732Z" fill="#C4F3F4"/>
+      <circle className="rsa-bot-eye" cx="6" cy="8.66732" r="1" fill="#C4F3F4" />
+      <circle className="rsa-bot-eye" cx="10" cy="8.66732" r="1" fill="#C4F3F4" />
+    </svg>
   );
 }
 
@@ -1014,3 +1020,4 @@ function dotStyle(delayMs: number): React.CSSProperties {
     animation: `rsaBlink 1.2s ${delayMs}ms infinite ease-in-out`,
   };
 }
+
