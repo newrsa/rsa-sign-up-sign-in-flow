@@ -851,12 +851,7 @@ export function UntitledPath() {
                   </div>
                 ) : (
                   <div key={i} style={{ display: "flex", gap: 12 }}>
-                    <img
-                      src={iconRsabotSmall.url}
-                      alt=""
-                      className="rsa-bot-blink"
-                      style={{ width: 24, height: 24, flexShrink: 0, marginTop: 0 }}
-                    />
+                    <BotIconSmallBlink size={24} style={{ flexShrink: 0, marginTop: 0 }} />
 
                     <div style={{ flex: 1, minWidth: 0 }}>
                       {m.content}
