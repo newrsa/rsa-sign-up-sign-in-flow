@@ -137,7 +137,7 @@ function PracticalTipsReply({ onChip }: { onChip: (text: string) => void }) {
   return (
     <div style={{ color: "#E6E6EE", fontFamily: OUTFIT, fontSize: 14, lineHeight: 1.6 }}>
       <p style={{ margin: 0, fontWeight: 700, color: "#FFFFFF" }}>ICSE Practical Tips:</p>
-      <ul style={{ margin: "10px 0 0", paddingLeft: 18, fontWeight: 300 }}>
+      <ul style={{ margin: "10px 0 0", paddingLeft: 18, fontWeight: 300, color: "#9090B0" }}>
         {tips.map((t) => (
           <li key={t} style={{ marginTop: 6 }}>{t}</li>
         ))}
