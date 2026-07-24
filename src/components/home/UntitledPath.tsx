@@ -854,8 +854,10 @@ export function UntitledPath() {
                     <img
                       src={iconRsabotSmall.url}
                       alt=""
-                      style={{ width: 28, height: 28, flexShrink: 0, marginTop: 4 }}
+                      className="rsa-bot-blink"
+                      style={{ width: 24, height: 24, flexShrink: 0, marginTop: 0 }}
                     />
+
                     <div style={{ flex: 1, minWidth: 0 }}>
                       {m.content}
                       <div
@@ -877,7 +879,7 @@ export function UntitledPath() {
 
               {isThinking && (
                 <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                  <img src={iconRsabotSmall.url} alt="" style={{ width: 28, height: 28 }} />
+                  <img src={iconRsabotSmall.url} alt="" className="rsa-bot-blink" style={{ width: 24, height: 24 }} />
                   <div
                     style={{
                       fontFamily: OUTFIT,
@@ -987,7 +989,17 @@ export function UntitledPath() {
           0%, 80%, 100% { opacity: 0.2; }
           40% { opacity: 1; }
         }
+        @keyframes rsaBotBlink {
+          0%, 92%, 100% { transform: scaleY(1); }
+          95%, 97% { transform: scaleY(0.1); }
+        }
+        .rsa-bot-blink {
+          animation: rsaBotBlink 4s infinite ease-in-out;
+          transform-origin: center 55%;
+          will-change: transform;
+        }
       `}</style>
+
     </div>
   );
 }
