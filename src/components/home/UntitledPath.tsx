@@ -99,19 +99,19 @@ function AssistantReply({
       </p>
       <div style={{ marginTop: 14 }}>
         <p style={{ margin: 0, fontWeight: 700, color: "#FFFFFF" }}>Mathematics:</p>
-        <p style={{ margin: "2px 0 0", fontWeight: 300 }}>
+        <p style={{ margin: "2px 0 0", fontWeight: 300, color: "#9090B0" }}>
           Algebra, geometry, coordinate systems — all foundational for JEE later.
         </p>
       </div>
       <div style={{ marginTop: 12 }}>
         <p style={{ margin: 0, fontWeight: 700, color: "#FFFFFF" }}>Physics:</p>
-        <p style={{ margin: "2px 0 0", fontWeight: 300 }}>
+        <p style={{ margin: "2px 0 0", fontWeight: 300, color: "#9090B0" }}>
           Attend every practical. ICSE practical marks can swing your grade by 10–15%.
         </p>
       </div>
       <div style={{ marginTop: 12 }}>
         <p style={{ margin: 0, fontWeight: 700, color: "#FFFFFF" }}>Hobby Electronics:</p>
-        <p style={{ margin: "2px 0 0", fontWeight: 300 }}>
+        <p style={{ margin: "2px 0 0", fontWeight: 300, color: "#9090B0" }}>
           Start with Arduino kits. Hands-on curiosity now = stronger concepts in college.
         </p>
       </div>
