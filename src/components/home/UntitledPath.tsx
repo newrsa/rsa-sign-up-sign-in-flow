@@ -755,7 +755,15 @@ export function UntitledPath() {
                   }
                   expanded={expanded}
                   onToggleExpanded={() => setExpanded((e) => !e)}
+                  phase2Added={phase2Added}
+                  checks2={checks2}
+                  onToggle2={(i) =>
+                    setChecks2((c) => c.map((v, idx) => (idx === i ? !v : v)))
+                  }
+                  expanded2={expanded2}
+                  onToggleExpanded2={() => setExpanded2((e) => !e)}
                 />
+
               )}
               {activeTab === "cards" && <CardsView checks={checks} />}
               {activeTab === "milestones" && <MilestonesView />}
