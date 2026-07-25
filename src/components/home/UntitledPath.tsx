@@ -954,9 +954,34 @@ export function UntitledPath() {
   const chatStarted = messages.length > 0 || isThinking;
 
   return (
-    <div className="absolute inset-0 flex" style={{ background: "#0e0f13" }}>
+    <div ref={containerRef} className="absolute inset-0 flex" style={{ background: "#0e0f13" }}>
+      {/* Floating Worklab toggle button (hidden while panel open) */}
+      {!worklabOpen && (
+        <button
+          type="button"
+          onClick={toggleWorklab}
+          aria-label="Open RSA Worklab"
+          className="absolute z-20"
+          style={{
+            top: 48,
+            right: 24,
+            width: 34,
+            height: 34,
+            padding: 0,
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img src={iconWorklab.url} alt="" style={{ width: 33, height: 34, display: "block" }} />
+        </button>
+      )}
+
       {/* LEFT: RSA CANVAS */}
-      <div className="relative flex-1 flex flex-col" style={{ borderRight: "1px solid #272735" }}>
+      <div className="relative flex flex-col min-w-0" style={{ width: `${widths[0]}%` }}>
         {/* Title + progress card */}
         <div
           style={{
