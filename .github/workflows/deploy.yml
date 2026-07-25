@@ -10,7 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy over SSH
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install & Build
+        run: |
+          npm install --legacy-peer-deps
+          npm run build
+
+      - name: Deploy built files over SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "dist/*"
+          target: "~/public_html/prototype/"
+          strip_components: 1
+
+      - name: Write .htaccess
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -18,27 +42,10 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            mkdir -p ~/public_html/prototype
-
-            if [ ! -d ~/public_html/prototype/.git ]; then
-              git clone https://github.com/newrsa/rsa-sign-up-sign-in-flow.git ~/public_html/prototype
-            else
-              cd ~/public_html/prototype
-              git fetch origin
-              git reset --hard origin/dev
-            fi
-
-            cd ~/public_html/prototype
-            npm install --legacy-peer-deps
-            npm run build
-
-            cp -r dist/* ~/public_html/prototype/
-
             cat > ~/public_html/prototype/.htaccess << 'EOF'
             Options -MultiViews
             RewriteEngine On
             RewriteCond %{REQUEST_FILENAME} !-f
             RewriteRule ^ index.html [QSA,L]
             EOF
-
             echo "Deployment Completed"
