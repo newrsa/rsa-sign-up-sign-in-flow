@@ -1,14 +1,35 @@
 name: Test SSH
 
 on:
-  workflow_dispatch:     
-
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Runner
+      - name: Show Secret Values
         run: |
-          echo "Runner Working"
-          uname -a
+          echo "HOST=${{ secrets.SSH_HOST }}"
+          echo "PORT=${{ secrets.SSH_PORT }}"
+          echo "USER=${{ secrets.SSH_USERNAME }}"
+
+      - name: Test TCP Port
+        run: |
+          nc -vz ${{ secrets.SSH_HOST }} ${{ secrets.SSH_PORT }}
+
+      - name: Test SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          timeout: 60s
+          command_timeout: 10m
+          script: |
+            hostname
+            whoami
+            pwd
