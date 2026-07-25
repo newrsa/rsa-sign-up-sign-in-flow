@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, type ReactNode } from "react";
-import { Send, Pencil } from "lucide-react";
+import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
+import { Send, Pencil, MoreHorizontal } from "lucide-react";
 
 import iconGradCanvas from "@/assets/untitled-path/icon_grad_canvas.svg.asset.json";
 import iconRsabotLarge from "@/assets/untitled-path/icon_rsabot_large.svg.asset.json";
@@ -14,6 +14,11 @@ import iconCards from "@/assets/untitled-path/tabs/icon_cards.svg.asset.json";
 import iconMilestone from "@/assets/untitled-path/tabs/icon_milestone.svg.asset.json";
 import iconAccOpen from "@/assets/untitled-path/tabs/accordion_open.svg.asset.json";
 import iconAccClose from "@/assets/untitled-path/tabs/accordion_close.svg.asset.json";
+import iconWorklab from "@/assets/worklab/icon_Worklab.svg.asset.json";
+import iconRsaWorklab from "@/assets/worklab/icon_RSA_worklab.svg.asset.json";
+import iconConfigure from "@/assets/worklab/icon_configure.svg.asset.json";
+import iconGenerate from "@/assets/worklab/icon_generate.svg.asset.json";
+import iconStore from "@/assets/worklab/icon_store.svg.asset.json";
 
 const CAREER_CARDS = [
   { img: imgPhd.url, title: "PhD in Physics", subtitle: "Explore the mysteries of the universe." },
@@ -513,6 +518,300 @@ function MilestonesView() {
   );
 }
 
+function ColumnDivider({ onDrag }: { onDrag: (deltaPx: number) => void }) {
+  const startX = useRef<number | null>(null);
+  const onMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    startX.current = e.clientX;
+    const move = (ev: MouseEvent) => {
+      if (startX.current == null) return;
+      const dx = ev.clientX - startX.current;
+      startX.current = ev.clientX;
+      onDrag(dx);
+    };
+    const up = () => {
+      startX.current = null;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseup", up);
+    };
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+  };
+  return (
+    <div
+      onMouseDown={onMouseDown}
+      style={{
+        width: 1,
+        flexShrink: 0,
+        background: "#272735",
+        position: "relative",
+        cursor: "col-resize",
+      }}
+    >
+      <div style={{ position: "absolute", inset: "0 -4px", cursor: "col-resize" }} />
+    </div>
+  );
+}
+
+function WorklabPanel({ onClose }: { onClose: () => void }) {
+  const [message, setMessage] = useState("");
+  const tiles: { label: string; icon: string; count: number }[] = [
+    { label: "Audio Overview", icon: "mic", count: 0 },
+    { label: "Slide Deck", icon: "play", count: 2 },
+    { label: "Video Overview", icon: "video", count: 1 },
+    { label: "Reports", icon: "doc", count: 5 },
+    { label: "Mind Map", icon: "mind", count: 3 },
+    { label: "Infographic", icon: "chart", count: 3 },
+  ];
+  return (
+    <div className="relative flex-1 flex flex-col min-w-0">
+      {/* Header */}
+      <div className="flex items-center justify-between" style={{ padding: "28px 28px 0 28px" }}>
+        <div className="flex items-center gap-2">
+          <img src={iconRsaWorklab.url} alt="" style={{ width: 14, height: 14 }} />
+          <span
+            style={{
+              fontFamily: OUTFIT,
+              fontWeight: 600,
+              fontSize: 12,
+              letterSpacing: "0.12em",
+              color: "#5BB947",
+            }}
+          >
+            RSA WORKLAB
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close Worklab"
+          style={{
+            width: 30,
+            height: 30,
+            borderRadius: 6,
+            background: "transparent",
+            border: "1px solid #3355F6",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            padding: 0,
+          }}
+        >
+          <img src={iconWorklab.url} alt="" style={{ width: 22, height: 22 }} />
+        </button>
+      </div>
+
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto" style={{ padding: "24px 28px 0 28px" }}>
+        <p
+          style={{
+            margin: 0,
+            fontFamily: OUTFIT,
+            fontWeight: 400,
+            fontSize: 15,
+            lineHeight: 1.5,
+            color: "#FFFFFF",
+          }}
+        >
+          Workspace to create your reports and refine aspirations through RSA chat
+        </p>
+
+        {/* Action buttons */}
+        <div style={{ marginTop: 20, display: "flex", gap: 10, alignItems: "center" }}>
+          {[
+            { label: "Configure", icon: iconConfigure.url },
+            { label: "Generate", icon: iconGenerate.url },
+            { label: "Store", icon: iconStore.url },
+          ].map((b) => (
+            <button
+              key={b.label}
+              type="button"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "8px 14px",
+                borderRadius: 8,
+                background: "transparent",
+                border: "1px solid #3355F6",
+                color: "#6177FF",
+                fontFamily: OUTFIT,
+                fontWeight: 500,
+                fontSize: 14,
+                cursor: "pointer",
+              }}
+            >
+              <img src={b.icon} alt="" style={{ width: 20, height: 18 }} />
+              {b.label}
+            </button>
+          ))}
+          <button
+            type="button"
+            aria-label="More"
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: 8,
+              background: "transparent",
+              border: "1px solid #3355F6",
+              color: "#6177FF",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              padding: 0,
+            }}
+          >
+            <MoreHorizontal style={{ width: 16, height: 16 }} />
+          </button>
+        </div>
+
+        {/* Tiles grid */}
+        <div
+          style={{
+            marginTop: 20,
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 12,
+          }}
+        >
+          {tiles.map((t) => (
+            <button
+              key={t.label}
+              type="button"
+              className="text-left"
+              style={{
+                padding: "16px 16px 18px",
+                borderRadius: 12,
+                background: "#0f0f18",
+                border: "1px solid #1e1e2a",
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                gap: 22,
+              }}
+            >
+              <TileIcon kind={t.icon} />
+              <div
+                style={{
+                  fontFamily: OUTFIT,
+                  fontWeight: 500,
+                  fontSize: 14,
+                  color: "#E6E6EE",
+                }}
+              >
+                {t.label} ({t.count})
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Chat input */}
+      <div style={{ padding: "16px 28px 20px 28px" }}>
+        <div
+          className="flex items-center gap-3"
+          style={{
+            padding: 10,
+            borderRadius: 12,
+            background: "#0f0f18",
+            border: "1px solid #00494a",
+          }}
+        >
+          <button
+            type="button"
+            aria-label="Attach"
+            style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer" }}
+          >
+            <img src={iconAttachment.url} alt="" style={{ width: 29, height: 29, display: "block" }} />
+          </button>
+          <input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Refine your aspirations or reports..."
+            className="flex-1 bg-transparent outline-none min-w-0"
+            style={{ fontFamily: OUTFIT, fontWeight: 400, fontSize: 15, color: "#FFFFFF" }}
+          />
+          <button
+            type="button"
+            aria-label="Voice"
+            style={{ background: "transparent", border: "none", padding: 0, cursor: "pointer" }}
+          >
+            <img src={iconVoice.url} alt="" style={{ width: 28, height: 28, display: "block" }} />
+          </button>
+          <button
+            type="button"
+            aria-label="Send"
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: 8,
+              border: "none",
+              background: "#00DCDF",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
+            <Send className="h-4 w-4" style={{ color: "#000" }} />
+          </button>
+        </div>
+        <p
+          style={{
+            marginTop: 10,
+            textAlign: "center",
+            fontFamily: OUTFIT,
+            fontWeight: 400,
+            fontSize: 12,
+            color: "#9090B0",
+          }}
+        >
+          RSA Engine · Powered by Right Step Ahead intelligence
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TileIcon({ kind }: { kind: string }) {
+  const color = "#6177FF";
+  const common = { width: 22, height: 22, stroke: color, fill: "none", strokeWidth: 1.8 } as const;
+  switch (kind) {
+    case "mic":
+      return (
+        <svg {...common} viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" strokeLinecap="round" /></svg>
+      );
+    case "play":
+      return (
+        <svg {...common} viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M10 9l5 3-5 3z" fill={color} stroke="none" /></svg>
+      );
+    case "video":
+      return (
+        <svg {...common} viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="12" rx="2" /><path d="M17 10l4-2v8l-4-2z" /></svg>
+      );
+    case "doc":
+      return (
+        <svg {...common} viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 16h6" strokeLinecap="round" /></svg>
+      );
+    case "mind":
+      return (
+        <svg {...common} viewBox="0 0 24 24"><rect x="8" y="10" width="8" height="4" rx="1" /><rect x="2" y="3" width="6" height="4" rx="1" /><rect x="2" y="17" width="6" height="4" rx="1" /><rect x="16" y="10" width="6" height="4" rx="1" /><path d="M8 5h2v7M8 19h2v-7" /></svg>
+      );
+    case "chart":
+      return (
+        <svg {...common} viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2" strokeLinecap="round" /></svg>
+      );
+    default:
+      return null;
+  }
+}
+
 export function UntitledPath() {
   const [title, setTitle] = useState("Untitled Path");
   const [subtitle, setSubtitle] = useState<string | null>(null);
@@ -528,9 +827,40 @@ export function UntitledPath() {
   const [expanded2, setExpanded2] = useState(true);
   const [checks, setChecks] = useState<boolean[]>([true, false, false, false]);
   const [checks2, setChecks2] = useState<boolean[]>([false, false, false, false]);
+  const [worklabOpen, setWorklabOpen] = useState(false);
+  const [widths, setWidths] = useState<number[]>([50, 50]); // percentages
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const toggleWorklab = () => {
+    setWorklabOpen((open) => {
+      if (open) {
+        setWidths([50, 50]);
+        return false;
+      }
+      setWidths([38, 38, 24]);
+      return true;
+    });
+  };
+
+  const dragBetween = useCallback((index: number, deltaPx: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+    const totalPx = container.getBoundingClientRect().width;
+    const deltaPct = (deltaPx / totalPx) * 100;
+    setWidths((prev) => {
+      const next = [...prev];
+      const min = 15;
+      const a = next[index] + deltaPct;
+      const b = next[index + 1] - deltaPct;
+      if (a < min || b < min) return prev;
+      next[index] = a;
+      next[index + 1] = b;
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     if (editing) {
@@ -624,9 +954,34 @@ export function UntitledPath() {
   const chatStarted = messages.length > 0 || isThinking;
 
   return (
-    <div className="absolute inset-0 flex" style={{ background: "#0e0f13" }}>
+    <div ref={containerRef} className="absolute inset-0 flex" style={{ background: "#0e0f13" }}>
+      {/* Floating Worklab toggle button (hidden while panel open) */}
+      {!worklabOpen && (
+        <button
+          type="button"
+          onClick={toggleWorklab}
+          aria-label="Open RSA Worklab"
+          className="absolute z-20"
+          style={{
+            top: 48,
+            right: 24,
+            width: 34,
+            height: 34,
+            padding: 0,
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img src={iconWorklab.url} alt="" style={{ width: 33, height: 34, display: "block" }} />
+        </button>
+      )}
+
       {/* LEFT: RSA CANVAS */}
-      <div className="relative flex-1 flex flex-col" style={{ borderRight: "1px solid #272735" }}>
+      <div className="relative flex flex-col min-w-0" style={{ width: `${widths[0]}%` }}>
         {/* Title + progress card */}
         <div
           style={{
@@ -785,8 +1140,10 @@ export function UntitledPath() {
         )}
       </div>
 
+      <ColumnDivider onDrag={(dx) => dragBetween(0, dx)} />
+
       {/* RIGHT: RSA ENGINE */}
-      <div className="relative flex-1 flex flex-col">
+      <div className="relative flex flex-col min-w-0" style={{ width: `${widths[1]}%` }}>
         {/* Header */}
         <div className="flex items-center gap-2" style={{ padding: "28px 40px 0 40px" }}>
           <img src={iconRsabotSmall.url} alt="" style={{ width: 14, height: 14 }} />
@@ -1119,6 +1476,12 @@ export function UntitledPath() {
         }
       `}</style>
 
+      {worklabOpen && (
+        <>
+          <ColumnDivider onDrag={(dx) => dragBetween(1, dx)} />
+          <WorklabPanel onClose={toggleWorklab} />
+        </>
+      )}
     </div>
   );
 }
