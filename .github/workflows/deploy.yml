@@ -22,7 +22,7 @@ jobs:
             cd ~/public_html/prototype
 
             if [ ! -d ".git" ]; then
-              git clone https://github.com/ORG/REPO.git .
+              git clone https://github.com/newrsa/rsa-sign-up-sign-in-flow.git .
             else
               git fetch origin
               git reset --hard origin/dev
