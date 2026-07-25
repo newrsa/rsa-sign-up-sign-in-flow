@@ -1,4 +1,4 @@
-name: Build React App
+name: Deploy React Vite to MilesWeb
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,3 +23,15 @@ jobs:
 
       - name: Build Project
         run: npm run build
+
+      - name: Deploy to MilesWeb FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ftp
+          local-dir: ./dist/
+          server-dir: /prototype/
+          dangerous-clean-slate: false
