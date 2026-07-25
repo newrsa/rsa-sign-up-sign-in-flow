@@ -10,39 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Source
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Test SSH Connection
+        uses: appleboy/ssh-action@v1.2.0
         with:
-          node-version: 22
-
-      - name: Install Dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Build Project
-        run: npm run build
-
-      - name: Show Build Output
-        run: |
-          echo "========== CURRENT DIRECTORY =========="
-          pwd
-
-          echo "========== ROOT FILES =========="
-          ls -la
-
-          echo "========== ALL DIRECTORIES =========="
-          find . -maxdepth 3 -type d
-
-          echo "========== DIST =========="
-          ls -la dist || true
-
-          echo "========== .OUTPUT =========="
-          ls -la .output || true
-
-          echo "========== .NITRO =========="
-          ls -la .nitro || true
-
-          echo "========== BUILD =========="
-          ls -la build || true
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo "===== SSH Connected Successfully ====="
+            whoami
+            pwd
+            hostname
+            node -v || true
+            ls -la
