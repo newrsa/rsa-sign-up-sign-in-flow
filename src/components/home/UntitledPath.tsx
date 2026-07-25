@@ -1476,6 +1476,12 @@ export function UntitledPath() {
         }
       `}</style>
 
+      {worklabOpen && (
+        <>
+          <ColumnDivider onDrag={(dx) => dragBetween(1, dx)} />
+          <WorklabPanel onClose={toggleWorklab} />
+        </>
+      )}
     </div>
   );
 }
