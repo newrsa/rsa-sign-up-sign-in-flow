@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, type ReactNode } from "react";
-import { Send, Pencil } from "lucide-react";
+import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
+import { Send, Pencil, MoreHorizontal } from "lucide-react";
 
 import iconGradCanvas from "@/assets/untitled-path/icon_grad_canvas.svg.asset.json";
 import iconRsabotLarge from "@/assets/untitled-path/icon_rsabot_large.svg.asset.json";
@@ -14,6 +14,11 @@ import iconCards from "@/assets/untitled-path/tabs/icon_cards.svg.asset.json";
 import iconMilestone from "@/assets/untitled-path/tabs/icon_milestone.svg.asset.json";
 import iconAccOpen from "@/assets/untitled-path/tabs/accordion_open.svg.asset.json";
 import iconAccClose from "@/assets/untitled-path/tabs/accordion_close.svg.asset.json";
+import iconWorklab from "@/assets/worklab/icon_Worklab.svg.asset.json";
+import iconRsaWorklab from "@/assets/worklab/icon_RSA_worklab.svg.asset.json";
+import iconConfigure from "@/assets/worklab/icon_configure.svg.asset.json";
+import iconGenerate from "@/assets/worklab/icon_generate.svg.asset.json";
+import iconStore from "@/assets/worklab/icon_store.svg.asset.json";
 
 const CAREER_CARDS = [
   { img: imgPhd.url, title: "PhD in Physics", subtitle: "Explore the mysteries of the universe." },
