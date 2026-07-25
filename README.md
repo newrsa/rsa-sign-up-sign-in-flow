@@ -1,1 +1,1 @@
-// This is a rsa Prototype tanstack app
+// This is a rsa Prototype tanstack
