@@ -3,7 +3,7 @@ name: Deploy React Vite to MilesWeb
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   deploy:
