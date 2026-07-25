@@ -19,18 +19,26 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             mkdir -p ~/public_html/prototype
-            cd ~/public_html/prototype
 
-            if [ ! -d ".git" ]; then
-              git clone https://github.com/newrsa/rsa-sign-up-sign-in-flow.git .
+            if [ ! -d ~/public_html/prototype/.git ]; then
+              git clone https://github.com/newrsa/rsa-sign-up-sign-in-flow.git ~/public_html/prototype
             else
+              cd ~/public_html/prototype
               git fetch origin
               git reset --hard origin/dev
             fi
 
+            cd ~/public_html/prototype
             npm install --legacy-peer-deps
             npm run build
 
-            touch tmp/restart.txt || true
+            cp -r dist/* ~/public_html/prototype/
+
+            cat > ~/public_html/prototype/.htaccess << 'EOF'
+            Options -MultiViews
+            RewriteEngine On
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteRule ^ index.html [QSA,L]
+            EOF
 
             echo "Deployment Completed"
