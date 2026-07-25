@@ -1140,8 +1140,10 @@ export function UntitledPath() {
         )}
       </div>
 
+      <ColumnDivider onDrag={(dx) => dragBetween(0, dx)} />
+
       {/* RIGHT: RSA ENGINE */}
-      <div className="relative flex-1 flex flex-col">
+      <div className="relative flex flex-col min-w-0" style={{ width: `${widths[1]}%` }}>
         {/* Header */}
         <div className="flex items-center gap-2" style={{ padding: "28px 40px 0 40px" }}>
           <img src={iconRsabotSmall.url} alt="" style={{ width: 14, height: 14 }} />
